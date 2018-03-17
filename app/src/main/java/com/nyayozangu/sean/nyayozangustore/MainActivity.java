@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    //set fragment
     private void setFragment(Fragment fragment) {
+        //set fragment
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
@@ -291,9 +291,8 @@ public class MainActivity extends AppCompatActivity {
         reconnectAnimation.startAnimation(startRotateAnimation);
     }
 
-    //manage navigation to outside links by creating a MyWebView class that extends the WebViewClient Class
     private class MyWebViewClient extends WebViewClient {
-
+        //manage navigation to outside links by creating a MyWebView class that extends the WebViewClient Class
         @SuppressWarnings("deprecation")
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
