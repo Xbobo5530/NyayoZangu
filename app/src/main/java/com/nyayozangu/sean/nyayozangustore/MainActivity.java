@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        BottomNavigationViewHelper.disableShiftMode(navigation);
         showProgressBar(); //load page display the loading progress bar
 
         //create new webView and handle cache
@@ -156,6 +157,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleDeepLinkIntent(Intent intent) {
+
+        // TODO: 3/18/18 fix the deepLinkIssue
+
         // ATTENTION: This was auto-generated to handle app links.
 //        Intent appLinkIntent = getIntent();
 //        String appLinkAction = appLinkIntent.getAction();
@@ -299,7 +303,6 @@ public class MainActivity extends AppCompatActivity {
         rotateReconnect(view);
         checkConnection();//when the retry button is check the connection;
     }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
