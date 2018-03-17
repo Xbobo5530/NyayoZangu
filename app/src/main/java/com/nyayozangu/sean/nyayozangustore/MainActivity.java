@@ -365,13 +365,5 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-//        @Override
-//        public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
-//            super.onReceivedHttpError(view, request, errorResponse);
-//            //when http error is received
-//            checkConnection();
-//            Log.i("Sean", "at onReceivedHttpError "+ "request is: " + request.toString() + " response is: " + errorResponse.toString());
-//        }
-
     }
 }
