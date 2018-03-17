@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class TutorialActivity extends AppCompatActivity {
 
-    private static final String EXTRA_MESSAGE = "com.sean.nyayozangustore.CREATE_ACC_URL";
+    private static final String EXTRA_MESSAGE = "com.nyayozangu.sean.nyayozangustore.CREATE_ACC_URL";
     private ViewPager mSlideViewPager;
     private LinearLayout mDotsLayout;
     private SliderAdapter sliderAdapter;

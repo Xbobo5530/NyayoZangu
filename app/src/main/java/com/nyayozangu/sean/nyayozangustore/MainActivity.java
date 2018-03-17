@@ -32,7 +32,7 @@ import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String EXTRA_MESSAGE = "com.sean.nyayozangustore.CREATE_ACC_URL";
+    private static final String EXTRA_MESSAGE = "com.nyayozangu.sean.nyayozangustore.CREATE_ACC_URL";
     private WebView mWebView;
 
     private HomeFragment homeFragment;
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
+        Log.i("Sean", "at setFragment, setting Fragment " + fragment.toString());
     }
 
     @Override
@@ -130,18 +131,20 @@ public class MainActivity extends AppCompatActivity {
 
         mWebView.setWebViewClient(new MyWebViewClient()); //use settings from MyWebViewClient
 
+
+        // TODO: 3/17/18 fix the first launch error on getting the intent
         if (isConnected()){
-            proceed(); //proceed to the app
-            Log.i("Sean", "at onCreate, isConnected");
-        }else {
-            checkConnection(); //check if an internet connection is present
-        }
-        
-        //if opened straight from craete account
-        Intent intent = getIntent();
-        String createAccUrl = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        setFragment(meFragment);
-        mWebView.loadUrl(createAccUrl);
+            Intent intent = getIntent();
+            if (intent.getStringExtra(EXTRA_MESSAGE) == null){
+                proceed();
+            }else{
+                Log.i("Sean","at onCreate, gettingStringExtra, extra message is "
+                        + intent.getStringExtra(EXTRA_MESSAGE));
+                setFragment(meFragment);
+                String createAccUrl = intent.getStringExtra(EXTRA_MESSAGE);
+                mWebView.loadUrl(createAccUrl);
+            }
+        }else{checkConnection();}
     }
 
     private void proceed() {
@@ -172,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
         mWebView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
             if (isConnected()) {
+                Log.i("Sean","at showProgressBar, showing progressBar");
                 if (progress < 100 && mProgressBar.getVisibility() == ProgressBar.GONE) {
                     mProgressBar.setVisibility(ProgressBar.VISIBLE);
                     mWebView.setVisibility(View.INVISIBLE);
@@ -184,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }else{
                 mProgressBar.setVisibility(ProgressBar.GONE);
+                mWebView.setVisibility(View.GONE);
+                checkConnection();
             }
             }
         });
@@ -220,8 +226,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void showAlertScreen() {
         Log.i("Sean","at showAlertScreen");
-        mWebView.clearView();
         setFragment(alertFragment);
+
     }
 
     public void openAccount(View view) {

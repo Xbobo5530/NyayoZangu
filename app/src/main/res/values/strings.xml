@@ -16,7 +16,7 @@
     <string name="store_search_url">https://store.nyayozangu.com/search</string>
     <string name="store_products_url">https://store.nyayozangu.com/collections/all</string>
     <string name="store_collections_url">https://store.nyayozangu.com/collections</string>
-    <string name="store_requests_url">https://requests.nyayozangu.com</string>
+    <string name="store_requests_url">https://store.nyayozangu.com/pages/product-requests</string>
 
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
