@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         showProgressBar(); //load page display the loading progress bar
 
         //create new webView and handle cache
-        WebView webView = new WebView( getApplicationContext() );
+        WebView webView = new WebView(getApplicationContext());
         handleCache(webView);
 
         //getting javascript settings
@@ -132,19 +132,48 @@ public class MainActivity extends AppCompatActivity {
 
 
         // TODO: 3/17/18 fix the first launch error on getting the intent
-        if (isConnected()){
+        if (isConnected()) {
             Intent intent = getIntent();
-            if (intent.getStringExtra(EXTRA_MESSAGE) == null){
+            if (intent.getStringExtra(EXTRA_MESSAGE) == null) {
                 proceed();
-            }else{
-                Log.i("Sean","at onCreate, gettingStringExtra, extra message is "
+            } else {
+                Log.i("Sean", "at onCreate, gettingStringExtra, extra message is "
                         + intent.getStringExtra(EXTRA_MESSAGE));
                 setFragment(meFragment);
                 String createAccUrl = intent.getStringExtra(EXTRA_MESSAGE);
                 mWebView.loadUrl(createAccUrl);
             }
-        }else{checkConnection();}
+        } else {
+            checkConnection();
+        }
+
+        handleDeepLinkIntent(getIntent());
     }
+
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleDeepLinkIntent(intent);
+    }
+
+    private void handleDeepLinkIntent(Intent intent) {
+        // ATTENTION: This was auto-generated to handle app links.
+//        Intent appLinkIntent = getIntent();
+//        String appLinkAction = appLinkIntent.getAction();
+//        Uri appLinkData = appLinkIntent.getData();
+        Log.i("Sean", "at handleDeepLinkIntent");
+        String appLinkAction = intent.getAction();
+        Uri appLinkData = intent.getData();
+        if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
+            String pageUrl = appLinkData.getLastPathSegment();
+            Uri appData = Uri.parse("https://store.nyayozangu.com").buildUpon()
+                    .appendPath(pageUrl).build();
+            //open the meFragment and load the appData url;
+            setFragment(homeFragment);
+            mWebView.loadUrl(String.valueOf(appData));
+            Log.i("Sean", "at handleDeepLinkIntent, url is " + String.valueOf(appData));
+        }
+    }
+
 
     private void proceed() {
         setFragment(homeFragment);
@@ -271,10 +300,11 @@ public class MainActivity extends AppCompatActivity {
         checkConnection();//when the retry button is check the connection;
     }
 
-    //navigating Web history
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // Check if the key event was the Back button and if there's history
+        //navigating Web history
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
             mWebView.goBack();
             return true;

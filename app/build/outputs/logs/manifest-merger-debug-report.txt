@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
 MERGED from [com.android.support:design:26.1.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ccf17b1b303147ecbf966b0818df9783/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/Sean/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/9c42e5342cae0bbdeeebe696a3492c4b/AndroidManifest.xml:2:1-11:12
@@ -26,33 +26,35 @@ MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/Sean/.gradle/caches/tr
 MERGED from [com.google.android.gms:play-services-base-license:11.8.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-base-license-11.8.0.aar/c7d0509a6aec3836f51e6594ce1c7b40/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-basement-license-11.8.0.aar/bc782b9d735ebd35ccd63794b496ef6a/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.8.0.aar/50af13f085e9ee14b17002c349d06ba1/AndroidManifest.xml:2:1-6:12
-INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
-INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
 	package
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:3:5-50
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:4:5-50
 		INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
 		INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-37:12
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:1-57:12
 		INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:5:5-79
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:6:5-79
 	android:name
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:5:22-76
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:6:22-76
 uses-permission#android.permission.INTERNET
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:7:5-67
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:8:5-67
 	android:name
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:7:22-64
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:8:22-64
 application
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:9:5-36:19
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:10:5-56:19
 MERGED from [com.android.support:design:26.1.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ccf17b1b303147ecbf966b0818df9783/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:design:26.1.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ccf17b1b303147ecbf966b0818df9783/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/AndroidManifest.xml:25:5-29:19
@@ -98,57 +100,91 @@ MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] /User
 MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.8.0.aar/50af13f085e9ee14b17002c349d06ba1/AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] /Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-tasks-license-11.8.0.aar/50af13f085e9ee14b17002c349d06ba1/AndroidManifest.xml:5:5-20
 	android:supportsRtl
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:15:9-35
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:16:9-35
 	android:label
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:13:9-41
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:14:9-41
 	android:fullBackupContent
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:11:9-41
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:12:9-41
 	android:roundIcon
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:14:9-54
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:15:9-54
 	android:icon
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:12:9-49
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:13:9-49
 	android:allowBackup
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:10:9-35
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:16:9-40
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:17:9-40
+meta-data#asset_statements
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:18:9-20:59
+	android:resource
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:20:13-56
+	android:name
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:19:13-44
 activity#com.nyayozangu.sean.nyayozangustore.MainActivity
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:17:9-21:52
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:22:9-41:20
 	android:screenOrientation
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:21:13-49
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:26:13-49
 	android:label
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:20:13-45
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:25:13-45
 	android:configChanges
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:19:13-59
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:24:13-59
 	android:name
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:18:13-41
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:23:13-41
+tools:validation
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:27:13-92
+	testUrl
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:27:31-89
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:30:13-40:29
+	android:autoVerify
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:30:28-53
+action#android.intent.action.VIEW
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:31:17-69
+	android:name
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:31:25-66
+category#android.intent.category.DEFAULT
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:33:17-76
+	android:name
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:33:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:34:17-78
+	android:name
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:34:27-75
+data
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:36:17-39:48
+	android:host
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:38:21-56
+	android:scheme
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:37:21-43
+	android:pathPattern
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:39:21-45
 activity#com.nyayozangu.sean.nyayozangustore.SplashScreenActivity
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:22:9-31:20
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:42:9-51:20
 	android:screenOrientation
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:25:13-49
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:45:13-49
 	android:label
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:24:13-45
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:44:13-45
 	android:theme
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:26:13-47
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:46:13-47
 	android:name
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:23:13-49
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:43:13-49
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:27:13-30:29
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:47:13-50:29
 action#android.intent.action.MAIN
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:28:17-69
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:48:17-69
 	android:name
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:28:25-66
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:48:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:29:17-77
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:49:17-77
 	android:name
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:29:27-74
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:49:27-74
 activity#com.nyayozangu.sean.nyayozangustore.TutorialActivity
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:32:9-35:53
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:52:9-55:54
 	android:screenOrientation
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:34:13-49
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:54:13-49
 	android:theme
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:35:13-51
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:55:13-51
 	android:name
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:33:13-45
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:53:13-45
 uses-sdk
 INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml

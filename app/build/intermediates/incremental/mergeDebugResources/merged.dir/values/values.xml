@@ -807,6 +807,7 @@
     <string name="account_more_text">Account</string>
     <string name="app_name">Nyayo Zangu Store</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://store.nyayozangu.com\",\n  }\n}]</string>
     <string name="back_tut_text">Back</string>
     <string name="blog_more_text">Blog</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>

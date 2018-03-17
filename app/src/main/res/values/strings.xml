@@ -54,5 +54,6 @@
     <string name="about_us_more_text">About us</string>
     <string name="explore_icon_more_desc">explore icon</string>
     <string name="finish_tut_text">Finish</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://store.nyayozangu.com\",\n  }\n}]</string>
 
 </resources>
