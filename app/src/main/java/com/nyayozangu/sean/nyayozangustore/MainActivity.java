@@ -131,9 +131,9 @@ public class MainActivity extends AppCompatActivity {
         mWebView.setWebViewClient(new MyWebViewClient()); //use settings from MyWebViewClient
 
 
-        // TODO: 3/17/18 fix the first launch error on getting the intent
         if (isConnected()) {
             Intent intent = getIntent();
+            //determine if MainActivity is launched from createAccount
             if (intent.getStringExtra(EXTRA_MESSAGE) == null) {
                 proceed();
             } else {
@@ -331,8 +331,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }else if (url.startsWith(getString(R.string.mailto_url_search))) {
                 //Handle mail Urls
-                // TODO: 3/9/18 fix the mail issue
-
                 startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse(url)));
                 return true;
             }else if (url.startsWith(getString(R.string.tel_url_search))) {
@@ -383,7 +381,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             } else if (uri.toString().startsWith(getString(R.string.mailto_url_search))) {
                 //Handle mail Urls
-                // TODO: 3/9/18 fix the mail issue
                 startActivity(new Intent(Intent.ACTION_SENDTO, uri));
             } else if (uri.toString().startsWith(getString(R.string.tel_url_search))) {
                 //Handle telephony Urls

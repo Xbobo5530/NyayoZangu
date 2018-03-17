@@ -150,13 +150,13 @@ ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/Androi
 	android:name
 		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:34:27-75
 data
-ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:36:17-39:48
+ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:36:17-39:46
 	android:host
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:38:21-56
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:37:21-56
 	android:scheme
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:37:21-43
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:39:21-43
 	android:pathPattern
-		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:39:21-45
+		ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:38:21-45
 activity#com.nyayozangu.sean.nyayozangustore.SplashScreenActivity
 ADDED from /Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/AndroidManifest.xml:42:9-51:20
 	android:screenOrientation

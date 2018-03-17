@@ -45,14 +45,14 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         } else if (savedVersionCode == DOES_NOT_EXIST) {
 
-            // TODO This is a new install (or the user cleared the shared preferences)
+            // This is a new install (or the user cleared the shared preferences)
             //start the main activity
             startActivity(new Intent(getApplicationContext(), TutorialActivity.class));
             Log.i("Sean", "At Splash, this is new install / cleared cache");
 
         } else if (currentVersionCode > savedVersionCode) {
 
-            // TODO This is an upgrade
+            // This is an upgrade
             //start the main activity
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             Log.i("Sean", "At Splash, this is upgrade");

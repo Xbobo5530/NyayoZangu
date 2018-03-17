@@ -3,8 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nav_cart_text">Cart</string>
     <string name="nav_me_text">Me</string>
@@ -17,7 +15,6 @@
     <string name="store_products_url">https://store.nyayozangu.com/collections/all</string>
     <string name="store_collections_url">https://store.nyayozangu.com/collections</string>
     <string name="store_requests_url">https://store.nyayozangu.com/pages/product-requests</string>
-
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -31,7 +28,6 @@
     <string name="connection_alert_text">Failed to connect to the internet.
         Please check your connection and try again</string>
     <string name="connection_failed_title_text">Connection Failed</string>
-
     <string name="title_activity_tutorial">TutorialActivity</string>
     <string name="nyayozangucom_url_search">nyayozangu.com</string>
     <string name="mailto_url_search">mailto:</string>
