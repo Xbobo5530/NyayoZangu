@@ -1,5 +1,6 @@
 package com.nyayozangu.sean.nyayozangustore;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Sean", "at setFragment, setting Fragment " + fragment.toString());
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,7 +195,9 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void handleCache(WebView webView) {
+        //noinspection deprecation
         webView.getSettings().setAppCacheMaxSize( 5 * 1024 * 1024 ); // 5MB
         webView.getSettings().setAppCachePath( getApplicationContext().getCacheDir().getAbsolutePath() );
         webView.getSettings().setAllowFileAccess( true );
@@ -211,6 +215,8 @@ public class MainActivity extends AppCompatActivity {
                 if (progress < 100 && mProgressBar.getVisibility() == ProgressBar.GONE) {
                     mProgressBar.setVisibility(ProgressBar.VISIBLE);
                     mWebView.setVisibility(View.INVISIBLE);
+                    //set the corresponding BottomNavigationBarItem
+//                    updateNavBarItem();
                 }
 
                 mProgressBar.setProgress(progress);
@@ -225,6 +231,24 @@ public class MainActivity extends AppCompatActivity {
             }
             }
         });
+    }
+
+    private void updateNavBarItem() {
+        // TODO: 3/18/18 handle the updateNavBarItem method.
+
+        Log.i("Sean", "at updateNavBarItem, currentUrl is " + mWebView.getUrl());
+        //check the url
+        //for the collections/products related links
+        if (mWebView.getUrl().contains(getString(R.string.store_collections_url)) ||
+                mWebView.getUrl().contains(getString(R.string.store_products_url_head))) {
+            //set the navigation item to collections
+            String newUrl = mWebView.getUrl();
+            Log.i("Sean", "at updateNavBarItem, newUrl is " + newUrl);
+            navigation.setSelectedItemId(R.id.navigation_collections);
+            mWebView.loadUrl(newUrl);
+        }
+        //for cart related links
+//        else if (currentUrl.contains()){}else{}
     }
 
     public void checkConnection() {
@@ -307,7 +331,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // Check if the key event was the Back button and if there's history
-        //navigating Web history
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
             mWebView.goBack();
             return true;
@@ -324,6 +347,16 @@ public class MainActivity extends AppCompatActivity {
         reconnectAnimation.startAnimation(startRotateAnimation);
     }
 
+    public void openSearch(View view) {
+        if (isConnected()) {
+            setFragment(meFragment);
+            mWebView.loadUrl(getString(R.string.store_search_url)
+            );
+        } else {
+            checkConnection();
+        }
+    }
+
     private class MyWebViewClient extends WebViewClient {
         //manage navigation to outside links by creating a MyWebView class that extends the WebViewClient Class
         @SuppressWarnings("deprecation")
@@ -332,42 +365,25 @@ public class MainActivity extends AppCompatActivity {
             if (Uri.parse(url).getHost().contains(getString(R.string.nyayozangucom_url_search))) {
                 // This is my web site, so do not override; let my WebView load the page
                 return false;
-            }else if (url.startsWith(getString(R.string.mailto_url_search))) {
-                //Handle mail Urls
-                startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse(url)));
-                return true;
             }else if (url.startsWith(getString(R.string.tel_url_search))) {
                 //Handle telephony Urls
                 startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(url)));
                 return true;
-            }else if (url.contains("twitter")){
-                Intent intent;
-                try{
-                    // get the Twitter app if possible
-                    getPackageManager().getPackageInfo("com.twitter.android", 0);
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=USERID"));
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Log.i("Sean", "Twitter app present");
-                }catch(Exception e){
-                    // no Twitter app, revert to browser
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                }startActivity(intent);
-            }else if (url.contains("facebook")){
-                try {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/1439743376069114"));
-                    startActivity(intent);
-                } catch(Exception e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                }
             }else if (url.contains("instagram")){
                 Intent instaIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 instaIntent.setPackage("com.instagram.android");
-
                 try {
                     startActivity(instaIntent);
                 } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 }
+            }
+            //updating the Bottom navigation bar
+            else if (Uri.parse(url).getHost().contains(getString(R.string.store_collections_url)) ||
+                    Uri.parse(url).getHost().contains(getString(R.string.store_products_url_head))) {
+                Log.i("Sean", "at MyWebViewClient, url is " + url);
+                navigation.setSelectedItemId(R.id.navigation_collections);
+                mWebView.loadUrl(url);
             }
             //if its any other link
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(url))); //open url in browser
@@ -389,10 +405,19 @@ public class MainActivity extends AppCompatActivity {
                 //Handle telephony Urls
                 startActivity(new Intent(Intent.ACTION_DIAL, uri));
             }
+            //updating the Bottom Navigation Bar selected item
+            else if (uri.toString().contains(getString(R.string.store_products_url_head)) ||
+                    uri.toString().contains(getString(R.string.store_collections_url))) {
+                navigation.setSelectedItemId(R.id.navigation_collections);
+                mWebView.loadUrl(uri.toString());
+            }
             //Handle Web Urls
             startActivity(new Intent(Intent.ACTION_VIEW, uri)); //open url in browser
             return true;
         }
+
+        //update Bottom NavigationView
+
 
     }
 }

@@ -12,12 +12,9 @@
     <string name="store_cart_url">https://store.nyayozangu.com/cart</string>
     <string name="store_acc_url">https://store.nyayozangu.com/account</string>
     <string name="store_search_url">https://store.nyayozangu.com/search</string>
-    <string name="store_products_url">https://store.nyayozangu.com/collections/all</string>
     <string name="store_collections_url">https://store.nyayozangu.com/collections</string>
     <string name="store_requests_url">https://store.nyayozangu.com/pages/product-requests</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="nyayo_zangu_stores_text">Nyayo Zangu Store</string>
     <string name="todo">TODO</string>
     <string name="nav_collections_text">Collections</string>
@@ -51,5 +48,7 @@
     <string name="explore_icon_more_desc">explore icon</string>
     <string name="finish_tut_text">Finish</string>
     <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://store.nyayozangu.com\",\n  }\n}]</string>
+    <string name="search_more_text">Search</string>
+    <string name="store_products_url_head">https://store.nyayozangu.com/products</string>
 
 </resources>
