@@ -1,39 +1,39 @@
 [
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_person_black_24dp.png.flat",
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xxxhdpi/ic_person_black_24dp.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_design_ic_visibility_off.png.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ccf17b1b303147ecbf966b0818df9783/res/drawable-xxxhdpi-v4/design_ic_visibility_off.png"
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_focused_holo.9.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-hdpi-v4/abc_list_focused_holo.9.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable_abc_edit_text_material.xml.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable/abc_edit_text_material.xml"
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_design_ic_visibility_off.png.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ccf17b1b303147ecbf966b0818df9783/res/drawable-xxxhdpi-v4/design_ic_visibility_off.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable_abc_edit_text_material.xml.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable/abc_edit_text_material.xml"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout_abc_action_bar_title_item.xml.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/layout/abc_action_bar_title_item.xml"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-mdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark_normal.xml.flat",
@@ -44,12 +44,12 @@
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-hdpi/ic_autorenew_black_24dp.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout_notification_template_media_custom.xml.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d9a0704c131f78ec77a15bcf3903ab81/res/layout/notification_template_media_custom.xml"
-    },
-    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/5a42df2855243b7161ecdb83a48cc6fd/res/drawable-xhdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout_notification_template_media_custom.xml.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/d9a0704c131f78ec77a15bcf3903ab81/res/layout/notification_template_media_custom.xml"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_googleg_disabled_color_18.png.flat",
