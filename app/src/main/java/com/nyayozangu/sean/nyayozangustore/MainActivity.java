@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String EXTRA_MESSAGE = "com.nyayozangu.sean.nyayozangustore.CREATE_ACC_URL";
     private WebView mWebView;
-
     private HomeFragment homeFragment;
     private MeFragment meFragment;
     private CartFragment cartFragment;
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private MoreFragment moreFragment;
     private ProgressBar mProgressBar;
     private BottomNavigationView navigation;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;{
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -88,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
-
     private void setFragment(Fragment fragment) {
         //set fragment
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -179,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Sean", "at handleDeepLinkIntent, url is " + String.valueOf(appData));
         }
     }
-
 
     private void proceed() {
         setFragment(homeFragment);

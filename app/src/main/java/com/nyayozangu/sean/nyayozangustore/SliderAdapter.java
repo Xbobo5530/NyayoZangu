@@ -30,10 +30,10 @@ public class SliderAdapter extends PagerAdapter {
             "DOOR TO DOOR DELIVERY"
     };
     public String[] slide_descriptions = {
-            "Simply find all the products you are looking for\nfrom our wide catalog of unique products\nhandpicked just for you.",
-            "In case you don't find what you are looking for,\nhead over to the Product Requests section\nand tell us what you need.",
-            "After placing your order\nsimply make your payments\nwith your preferred payment solution\nlike MPesa, Tigo Pesa, Airtel Money... \nOr even a bank deposit if you so choose.",
-            "We understand how precious your time is, \nso after you make your purchase,\nwe will deliver your packaged where ever you want it."
+            "Find products you are looking for\nfrom our catalog of unique products\nhandpicked just for you.",
+            "In case you can't find what you are looking for,\nhead over to the Product Requests section\nand tell us what you need.",
+            "Making payments is fast and easy.\nUse MPesa, Tigo Pesa, Airtel Money\nor even a bank deposit if you so choose.",
+            "We understand how precious your time is, \nwe will bring your package to you.\nWherever that might be."
     };
     Context context;
     LayoutInflater layoutInflater;

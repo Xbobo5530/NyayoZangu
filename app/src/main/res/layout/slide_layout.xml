@@ -15,6 +15,7 @@
             android:id="@+id/tutortialImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:srcCompat="@drawable/nyayozangu_tutorial_image" />
 
         <TextView
@@ -34,10 +35,13 @@
             android:id="@+id/tutorialDescriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="35dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
             android:text="@string/description_placeholder_text"
             android:textAlignment="center"
-            android:textColor="@color/colorWhiteTransparent"/>
+            android:textColor="@color/colorWhiteTransparent"
+            android:textSize="17sp" />
 
     </LinearLayout>
 

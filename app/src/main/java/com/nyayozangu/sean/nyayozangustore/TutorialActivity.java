@@ -57,13 +57,21 @@ public class TutorialActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-                mBackButton.setText(R.string.back_tut_text);
+                mBackButton.setText("Create Account");
+                mBackButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        createAccount(view);
+                    }
+                });
             }else{
                 mNextButton.setEnabled(true);
                 mBackButton.setEnabled(true);
                 mBackButton.setVisibility(View.VISIBLE);
                 mNextButton.setText(R.string.next_tut_text);
                 mBackButton.setText(R.string.back_tut_text);
+
             }
         }
 
