@@ -27,21 +27,55 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
+        <RelativeLayout
+            android:id="@+id/fab_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/search_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="160dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:onClick="openSearch"
+            android:tint="@android:color/white"
+            android:tintMode="src_in"
+            android:visibility="invisible"
+            app:backgroundTint="@color/colorFAB2"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/ic_search_black_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/share_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="90dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:tint="@android:color/white"
+            android:tintMode="src_in"
+            android:visibility="invisible"
+            app:backgroundTint="@color/colorFAB1"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="?attr/actionModeShareDrawable" />
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:background="@color/colorAccent"
-            android:onClick="openSearch"
-            android:tint="@color/colorWhite"
-            android:tintMode="src_atop"
-            app:rippleColor="@color/colorWhite"
-            app:srcCompat="@android:drawable/ic_search_category_default"
-            tools:layout_editor_absoluteX="341dp"
-            tools:layout_editor_absoluteY="467dp" />
-
+            android:tint="@android:color/white"
+            android:tintMode="src_in"
+            app:backgroundTint="@color/colorAccent"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:rippleColor="@android:color/white"
+            app:srcCompat="@android:drawable/ic_input_add" />
     </FrameLayout>
 
 

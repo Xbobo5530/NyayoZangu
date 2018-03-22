@@ -28,13 +28,17 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String EXTRA_MESSAGE = "com.nyayozangu.sean.nyayozangustore.CREATE_ACC_URL";
     private WebView mWebView;
+    private FrameLayout mMainFrame;
+    private RelativeLayout mFabBackground;
     private HomeFragment homeFragment;
     private MeFragment meFragment;
     private CartFragment cartFragment;
@@ -43,9 +47,13 @@ public class MainActivity extends AppCompatActivity {
     private MoreFragment moreFragment;
     private ProgressBar mProgressBar;
     private BottomNavigationView navigation;
-    private FloatingActionButton mFab;
+    private FloatingActionButton mFab, mShareFab, mSearchFab;
+    private Boolean isFabOpen;
+    private Animation fab_open, fab_close, rotate_forward, rotate_backward;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;{
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
+
+    {
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
             //on selecting bottom navigation item
             @Override
@@ -107,7 +115,23 @@ public class MainActivity extends AppCompatActivity {
         //constructing elements
         mWebView = findViewById(R.id.webView);
         mProgressBar = findViewById(R.id.progress_bar);
+        mMainFrame = findViewById(R.id.main_frame);
+        mFabBackground = findViewById(R.id.fab_background);
+
         mFab = findViewById(R.id.fab);
+        mShareFab = findViewById(R.id.share_fab);
+        mSearchFab = findViewById(R.id.search_fab);
+        isFabOpen = false;
+
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_backward);
+
+        mFab.setOnClickListener(this);
+        mShareFab.setOnClickListener(this);
+        mSearchFab.setOnClickListener(this);
+
 
         //fragments
         homeFragment = new HomeFragment();
@@ -150,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //opened from external links to deep links
         handleDeepLinkIntent(getIntent());
+
     }
 
     protected void onNewIntent(Intent intent) {
@@ -184,46 +209,47 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetJavaScriptEnabled")
     private void handleCache(WebView webView) {
         //noinspection deprecation
-        webView.getSettings().setAppCacheMaxSize( 5 * 1024 * 1024 ); // 5MB
-        webView.getSettings().setAppCachePath( getApplicationContext().getCacheDir().getAbsolutePath() );
-        webView.getSettings().setAllowFileAccess( true );
-        webView.getSettings().setAppCacheEnabled( true );
-        webView.getSettings().setJavaScriptEnabled( true );
-        webView.getSettings().setCacheMode( WebSettings.LOAD_DEFAULT ); // load online by default
+        webView.getSettings().setAppCacheMaxSize(5 * 1024 * 1024); // 5MB
+        webView.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT); // load online by default
     }
 
     private void showProgressBar() {
         mWebView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
-            if (isConnected()) {
-                Log.i("Sean","at showProgressBar, showing progressBar");
-                if (progress < 100 && mProgressBar.getVisibility() == ProgressBar.GONE) {
-                    mProgressBar.setVisibility(ProgressBar.VISIBLE);
-                    mWebView.setVisibility(View.INVISIBLE);
-                }
+                if (isConnected()) {
+                    Log.i("Sean", "at showProgressBar, showing progressBar");
+                    if (progress < 100 && mProgressBar.getVisibility() == ProgressBar.GONE) {
+                        mProgressBar.setVisibility(ProgressBar.VISIBLE);
+                        mWebView.setVisibility(View.INVISIBLE);
+                    }
 
 
-                mProgressBar.setProgress(progress);
-                if (progress > 40) {
-                    Log.i("Sean", "at showProgressBar, progress is " + progress);
+                    mProgressBar.setProgress(progress);
+                    if (progress > 40) {
+                        Log.i("Sean", "at showProgressBar, progress is " + progress);
+                        mProgressBar.setVisibility(ProgressBar.GONE);
+                        mWebView.setVisibility(View.VISIBLE);
+                    }
+                } else {
                     mProgressBar.setVisibility(ProgressBar.GONE);
-                    mWebView.setVisibility(View.VISIBLE);
+                    mWebView.setVisibility(View.GONE);
+                    checkConnection();
                 }
-            }else{
-                mProgressBar.setVisibility(ProgressBar.GONE);
-                mWebView.setVisibility(View.GONE);
-                checkConnection();
-            }
             }
         });
     }
 
     public void checkConnection() {
         Log.i("Sean", "at checkConnection");
-        if (isConnected()){
+        if (isConnected()) {
             mFab.setVisibility(View.VISIBLE); //when connected show the fab
-            if (mWebView.getUrl() == null){proceed();}
-            else{
+            if (mWebView.getUrl() == null) {
+                proceed();
+            } else {
                 navigation.setSelectedItemId(navigation.getSelectedItemId());
                 mWebView.loadUrl(mWebView.getUrl());
             }
@@ -237,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         //check if there's a connection
         Context context = getApplicationContext();
         ConnectivityManager cm =
-                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = null;
         if (cm != null) {
             activeNetwork = cm.getActiveNetworkInfo();
@@ -251,39 +277,46 @@ public class MainActivity extends AppCompatActivity {
         mFab.setVisibility(View.INVISIBLE); //hide fab when alertScreen is visible
         setFragment(alertFragment, null);
         // TODO: 3/22/18 show the alert message
-
     }
 
     public void openAccount(View view) {
-        if (isConnected()){
+        if (isConnected()) {
             setFragment(meFragment, getString(R.string.store_acc_url));
-        }else{
+        } else {
             checkConnection();
         }
     }
 
     public void openProductRequests(View view) {
-        if (isConnected()){
+        if (isConnected()) {
             setFragment(meFragment, getString(R.string.store_requests_url));
-        }else{checkConnection();}
+        } else {
+            checkConnection();
+        }
     }
 
     public void openBlog(View view) {
-        if (isConnected()){
+        if (isConnected()) {
             setFragment(meFragment, getString(R.string.blog_url));
-        }else{checkConnection();}
+        } else {
+            checkConnection();
+        }
     }
 
     public void openContact(View view) {
         if (isConnected()) {
             setFragment(meFragment, getString(R.string.contact_url));
-        }else{checkConnection();}
+        } else {
+            checkConnection();
+        }
     }
 
     public void openAbout(View view) {
         if (isConnected()) {
             setFragment(meFragment, getString(R.string.about_url));
-        }else{checkConnection();}
+        } else {
+            checkConnection();
+        }
     }
 
     public void reConnect(View view) {
@@ -324,9 +357,80 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void openLiveChat(View view) {
+    // TODO: 3/22/18 add liveChat
+    /*public void openLiveChat(View view) {
         //opening liveChat
         setFragment(meFragment, getString(R.string.livechat_url));
+    }*/
+
+    //for FAP animation
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+
+        switch (id) {
+            case R.id.fab:
+                animateFAB();
+                break;
+            case R.id.share_fab:
+                animateFAB();
+                shareCurrPage();
+                Log.d("Sean", "shareFab");
+                break;
+            case R.id.search_fab:
+                //open search
+                animateFAB();
+                setFragment(meFragment, getString(R.string.store_search_url));
+                Log.d("Sean", "searchFab");
+                break;
+        }
+    }
+
+    private void shareCurrPage() {
+        try {
+            String urlToShare = mWebView.getOriginalUrl();
+
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+            shareIntent.putExtra(Intent.EXTRA_TEXT, urlToShare);
+            startActivity(Intent.createChooser(shareIntent, "Share this page with"));
+        } catch (Exception e) {
+            Log.i("Sean", "at shareCurrPage, error is " + e.getMessage());
+        }
+    }
+
+    public void animateFAB() {
+
+        if (isFabOpen) {
+
+            mFab.startAnimation(rotate_backward);
+            mShareFab.startAnimation(fab_close);
+            mSearchFab.startAnimation(fab_close);
+            mShareFab.setClickable(false);
+            mSearchFab.setClickable(false);
+            isFabOpen = false;
+            mFabBackground.setClickable(false);
+            Log.d("Sean", "close");
+
+        } else {
+
+            mFab.startAnimation(rotate_forward);
+            mShareFab.startAnimation(fab_open);
+            mSearchFab.startAnimation(fab_open);
+            mShareFab.setClickable(true);
+            mSearchFab.setClickable(true);
+            isFabOpen = true;
+            mFabBackground.setClickable(true);
+            mFabBackground.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    animateFAB();
+                }
+            });
+            Log.d("Sean", "open");
+
+        }
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -359,14 +463,13 @@ public class MainActivity extends AppCompatActivity {
                     setFragment(meFragment, url);
                 }
                 return false;
-            }else if (url.startsWith(getString(R.string.tel_url_search))) {
+            } else if (url.startsWith(getString(R.string.tel_url_search))) {
                 //Handle telephony Urls
                 Log.i("Sean", "at shouldOverrideUrlLoading, Url is " + url);
                 return true;
             }
-
             //if its any other link
-            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(url))); //open url in browser
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url))); //open url in browser
             return true;
         }
 
@@ -414,4 +517,5 @@ public class MainActivity extends AppCompatActivity {
             showAlertScreen();
         }
     }
+
 }

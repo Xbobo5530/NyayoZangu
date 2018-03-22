@@ -54,7 +54,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             // This is an upgrade
             //start the main activity
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), TutorialActivity.class));
             Log.i("Sean", "At Splash, this is upgrade");
         }
 
