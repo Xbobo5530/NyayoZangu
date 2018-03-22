@@ -18,16 +18,26 @@
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
             style="@style/Base.Widget.AppCompat.ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:foregroundTint="@color/colorAccent"
-            android:theme="@android:style/Widget.Material.Light.ProgressBar.Large" />
+            android:layout_gravity="center" />
+
+        <!--<android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:onClick="openLiveChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_dialog_email"
+            tools:layout_editor_absoluteX="341dp"
+            tools:layout_editor_absoluteY="467dp" />-->
+
     </FrameLayout>
 
 
@@ -41,6 +51,6 @@
         android:textAlignment="center"
         app:itemIconTint="@color/nav_item"
         app:itemTextColor="@color/nav_item"
-        app:menu="@menu/navigation"/>
+        app:menu="@menu/navigation" />
 
 </RelativeLayout>

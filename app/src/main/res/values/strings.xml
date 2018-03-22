@@ -1,43 +1,25 @@
 <resources>
     <string name="app_name">Nyayo Zangu Store</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nav_cart_text">Cart</string>
-    <string name="nav_me_text">Me</string>
-    <string name="nav_search_text">Search</string>
-    <string name="nav_products_text">Products</string>
-    <string name="store_home_url">https://store.nyayozangu.com</string>
+    <string name="store_home_url">https://store.nyayozangu.com/</string>
     <string name="store_cart_url">https://store.nyayozangu.com/cart</string>
     <string name="store_acc_url">https://store.nyayozangu.com/account</string>
     <string name="store_search_url">https://store.nyayozangu.com/search</string>
     <string name="store_collections_url">https://store.nyayozangu.com/collections</string>
     <string name="store_requests_url">https://store.nyayozangu.com/pages/product-requests</string>
-    <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="nyayo_zangu_stores_text">Nyayo Zangu Store</string>
     <string name="todo">TODO</string>
     <string name="nav_collections_text">Collections</string>
-    <string name="nav_request_text">Requests</string>
-    <string name="retry_text">Retry</string>
-    <string name="close_text">Close</string>
-    <string name="nyayozangu_url">https://nyayozangu.com</string>
-    <string name="connection_alert_text">Failed to connect to the internet.
-        Please check your connection and try again</string>
-    <string name="connection_failed_title_text">Connection Failed</string>
-    <string name="title_activity_tutorial">TutorialActivity</string>
     <string name="nyayozangucom_url_search">nyayozangu.com</string>
-    <string name="mailto_url_search">mailto:</string>
     <string name="tel_url_search">tel:</string>
-    <string name="connecting_text">Connecting…</string>
     <string name="shopify_url_text">shopify.com</string>
-    <string name="connction_error_message_text">Failed to connect to the internet\nCheck your connection</string>
+    <string name="connection_error_message_text">Failed to connect to the internet\nCheck your connection</string>
     <string name="click_to_retry_text">Click to retry</string>
     <string name="nav_more_text">More</string>
     <string name="heading_placeholder_text">HEADING</string>
     <string name="description_placeholder_text">Description</string>
     <string name="create_acc_url">https://store.nyayozangu.com/account/register</string>
-    <string name="create_an_account_tut_text">Create account</string>
     <string name="back_tut_text">Back</string>
     <string name="next_tut_text">Next</string>
     <string name="account_more_text">Account</string>
@@ -49,6 +31,9 @@
     <string name="finish_tut_text">Finish</string>
     <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://store.nyayozangu.com\",\n  }\n}]</string>
     <string name="search_more_text">Search</string>
-    <string name="store_products_url_head">https://store.nyayozangu.com/products</string>
+    <string name="about_url">https://store.nyayozangu.com/pages/about-us</string>
+    <string name="contact_url">https://store.nyayozangu.com/pages/contact-us</string>
+    <string name="blog_url">https://store.nyayozangu.com/blogs/stories</string>
+    <string name="livechat_url">https://app.purechat.com/w/NyayoZanguStore</string>
 
 </resources>

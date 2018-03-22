@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +22,7 @@
                 android:text="@string/nyayo_zangu_stores_text"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </android.support.v7.widget.Toolbar>
 
 
@@ -37,7 +38,6 @@
                 android:paddingStart="@dimen/activity_horizontal_margin">
 
                 <LinearLayout
-                    android:id="@+id/account_menu_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="openAccount"
@@ -59,7 +59,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/search_menu_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="openSearch"
@@ -81,7 +80,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/product_request_menu_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="openProductRequests"
@@ -93,19 +91,18 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
                         android:contentDescription="@string/explore_icon_more_desc"
-                        android:src="@drawable/ic_explore_black_24dp"/>
+                        android:src="@drawable/ic_explore_black_24dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/text_margin"
                         android:text="@string/product_requests_more_text"
-                        android:textAppearance="?attr/textAppearanceListItem"/>
+                        android:textAppearance="?attr/textAppearanceListItem" />
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:id="@+id/blog_menu_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="openBlog"
@@ -128,18 +125,18 @@
 
 
                 <LinearLayout
-                    android:id="@+id/contact_menu_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="openContact"
                     android:orientation="horizontal"
                     tools:ignore="OnClick">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
                         android:src="@android:drawable/sym_action_call"
-                        android:tint="@color/colorPrimaryDark"/>
+                        android:tint="@color/colorPrimaryDark" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -150,24 +147,25 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/about_menu_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="openAbout"
                     android:orientation="horizontal"
                     tools:ignore="OnClick">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|center"
                         android:src="@drawable/ic_info_black_24dp"
-                        android:tint="@color/colorPrimaryDark"/>
+                        android:tint="@color/colorPrimaryDark" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/text_margin"
                         android:text="@string/about_us_more_text"
-                        android:textAppearance="?attr/textAppearanceListItem"/>
+                        android:textAppearance="?attr/textAppearanceListItem" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

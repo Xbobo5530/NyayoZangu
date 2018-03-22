@@ -2,7 +2,6 @@ package com.nyayozangu.sean.nyayozangustore;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -24,6 +23,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -42,41 +42,38 @@ public class MainActivity extends AppCompatActivity {
     private MoreFragment moreFragment;
     private ProgressBar mProgressBar;
     private BottomNavigationView navigation;
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;{
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
             //on selecting bottom navigation item
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         if (isConnected()) {
-                            setFragment(homeFragment);
-                            mWebView.loadUrl(getString(R.string.store_home_url));
-                            Log.i("Sean", "at homeFragment, url is " + mWebView.getUrl() );
+                            setFragment(homeFragment, getString(R.string.store_home_url));
                             return true;
                         }
                         checkConnection();
                         return true;
                     case R.id.navigation_collections:
                         if (isConnected()) {
-                            setFragment(collectionsFragment);
-                            mWebView.loadUrl(getString(R.string.store_collections_url));
+                            setFragment(collectionsFragment, getString(R.string.store_collections_url));
                             return true;
                         }
                         checkConnection();
                         return true;
                     case R.id.navigation_cart:
                         if (isConnected()) {
-                            setFragment(cartFragment);
-                            mWebView.loadUrl(getString(R.string.store_cart_url));
+                            setFragment(cartFragment, getString(R.string.store_cart_url));
                             return true;
                         }
                         checkConnection();
                         return true;
                     case R.id.navigation_more:
                         if (isConnected()) {
-                            setFragment(moreFragment);
+                            setFragment(moreFragment, null);
                             return true;
                         }
                         checkConnection();
@@ -86,12 +83,17 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
-    private void setFragment(Fragment fragment) {
-        //set fragment
+
+    private void setFragment(Fragment fragment, String url) {
+        //set fragment, and pass on the url to load
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
-        Log.i("Sean", "at setFragment, setting Fragment " + fragment.toString());
+        if (url != null) {
+            mWebView.loadUrl(url);
+        }
+        Log.i("Sean", "at setFragment, setting Fragment " + fragment.toString() +
+                "\nloading mWebView, url is " + url);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -102,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //constructing elements
-        //main activity & webView
         mWebView = findViewById(R.id.webView);
         mProgressBar = findViewById(R.id.progress_bar);
 
@@ -139,14 +140,13 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Log.i("Sean", "at onCreate, gettingStringExtra, extra message is "
                         + intent.getStringExtra(EXTRA_MESSAGE));
-                setFragment(meFragment);
                 String createAccUrl = intent.getStringExtra(EXTRA_MESSAGE);
-                mWebView.loadUrl(createAccUrl);
+                setFragment(meFragment, createAccUrl);
             }
         } else {
             checkConnection();
         }
-
+        //opened from external links to deep links
         handleDeepLinkIntent(getIntent());
     }
 
@@ -158,11 +158,12 @@ public class MainActivity extends AppCompatActivity {
     private void handleDeepLinkIntent(Intent intent) {
 
         // TODO: 3/18/18 fix the deepLinkIssue
-
-        // ATTENTION: This was auto-generated to handle app links.
-//        Intent appLinkIntent = getIntent();
-//        String appLinkAction = appLinkIntent.getAction();
-//        Uri appLinkData = appLinkIntent.getData();
+        /*
+        ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
+        */
         Log.i("Sean", "at handleDeepLinkIntent");
         String appLinkAction = intent.getAction();
         Uri appLinkData = intent.getData();
@@ -171,15 +172,14 @@ public class MainActivity extends AppCompatActivity {
             Uri appData = Uri.parse("https://store.nyayozangu.com").buildUpon()
                     .appendPath(pageUrl).build();
             //open the meFragment and load the appData url;
-            setFragment(homeFragment);
+            setFragment(homeFragment, getString(R.string.store_home_url));
             mWebView.loadUrl(String.valueOf(appData));
             Log.i("Sean", "at handleDeepLinkIntent, url is " + String.valueOf(appData));
         }
     }
 
     private void proceed() {
-        setFragment(homeFragment);
-        mWebView.loadUrl(getString(R.string.store_home_url));
+        setFragment(homeFragment, getString(R.string.store_home_url));
         Log.i("Sean", "at proceed(url)");
     }
 
@@ -200,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setAppCacheEnabled( true );
         webView.getSettings().setJavaScriptEnabled( true );
         webView.getSettings().setCacheMode( WebSettings.LOAD_DEFAULT ); // load online by default
-
     }
 
     private void showProgressBar() {
@@ -211,12 +210,12 @@ public class MainActivity extends AppCompatActivity {
                 if (progress < 100 && mProgressBar.getVisibility() == ProgressBar.GONE) {
                     mProgressBar.setVisibility(ProgressBar.VISIBLE);
                     mWebView.setVisibility(View.INVISIBLE);
-                    //set the corresponding BottomNavigationBarItem
-//                    updateNavBarItem();
                 }
 
+
                 mProgressBar.setProgress(progress);
-                if (progress == 100) {
+                if (progress > 35) {
+                    Log.i("Sean", "at showProgressBar, progress is " + progress);
                     mProgressBar.setVisibility(ProgressBar.GONE);
                     mWebView.setVisibility(View.VISIBLE);
                 }
@@ -227,24 +226,6 @@ public class MainActivity extends AppCompatActivity {
             }
             }
         });
-    }
-
-    private void updateNavBarItem() {
-        // TODO: 3/18/18 handle the updateNavBarItem method.
-
-        Log.i("Sean", "at updateNavBarItem, currentUrl is " + mWebView.getUrl());
-        //check the url
-        //for the collections/products related links
-        if (mWebView.getUrl().contains(getString(R.string.store_collections_url)) ||
-                mWebView.getUrl().contains(getString(R.string.store_products_url_head))) {
-            //set the navigation item to collections
-            String newUrl = mWebView.getUrl();
-            Log.i("Sean", "at updateNavBarItem, newUrl is " + newUrl);
-            navigation.setSelectedItemId(R.id.navigation_collections);
-            mWebView.loadUrl(newUrl);
-        }
-        //for cart related links
-//        else if (currentUrl.contains()){}else{}
     }
 
     public void checkConnection() {
@@ -266,26 +247,24 @@ public class MainActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         ConnectivityManager cm =
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
         NetworkInfo activeNetwork = null;
         if (cm != null) {
             activeNetwork = cm.getActiveNetworkInfo();
         }
-
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
     }
 
     private void showAlertScreen() {
-        Log.i("Sean","at showAlertScreen");
-        setFragment(alertFragment);
+        Log.i("Sean", "at showAlertScreen, alert message is ");
+        setFragment(alertFragment, null);
+        // TODO: 3/22/18 show the alert message
 
     }
 
     public void openAccount(View view) {
         if (isConnected()){
-            setFragment(meFragment);
-            mWebView.loadUrl(getString(R.string.store_acc_url));
+            setFragment(meFragment, getString(R.string.store_acc_url));
         }else{
             checkConnection();
         }
@@ -293,29 +272,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void openProductRequests(View view) {
         if (isConnected()){
-            setFragment(meFragment);
-            mWebView.loadUrl(getString(R.string.store_requests_url));
+            setFragment(meFragment, getString(R.string.store_requests_url));
         }else{checkConnection();}
     }
 
     public void openBlog(View view) {
         if (isConnected()){
-            setFragment(meFragment);
-            mWebView.loadUrl("https://store.nyayozangu.com/blogs/stories");
+            setFragment(meFragment, getString(R.string.blog_url));
         }else{checkConnection();}
     }
 
     public void openContact(View view) {
         if (isConnected()) {
-            setFragment(meFragment);
-            mWebView.loadUrl("https://store.nyayozangu.com/pages/contact-us");
+            setFragment(meFragment, getString(R.string.contact_url));
         }else{checkConnection();}
     }
 
     public void openAbout(View view) {
         if (isConnected()) {
-            setFragment(meFragment);
-            mWebView.loadUrl("https://store.nyayozangu.com/pages/about-us");
+            setFragment(meFragment, getString(R.string.about_url));
         }else{checkConnection();}
     }
 
@@ -328,8 +303,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // Check if the key event was the Back button and if there's history
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-            mWebView.goBack();
-            return true;
+            if (!mWebView.getUrl().equals(getString(R.string.store_home_url))) {
+                mWebView.goBack();
+                return true;
+            } else {
+                finish();
+            }//if at home url, pressing back exits the app
         }
         // If it wasn't the Back key or there's no web page history, bubble up to the default
         // system behavior (probably exit the activity)
@@ -345,42 +324,51 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSearch(View view) {
         if (isConnected()) {
-            setFragment(meFragment);
-            mWebView.loadUrl(getString(R.string.store_search_url)
-            );
+            setFragment(meFragment, getString(R.string.store_search_url));
         } else {
             checkConnection();
         }
     }
 
+    public void openLiveChat(View view) {
+        //opening liveChat
+        setFragment(meFragment, getString(R.string.livechat_url));
+    }
+
     private class MyWebViewClient extends WebViewClient {
+
         //manage navigation to outside links by creating a MyWebView class that extends the WebViewClient Class
         @SuppressWarnings("deprecation")
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (Uri.parse(url).getHost().contains(getString(R.string.nyayozangucom_url_search))) {
+                Log.i("Sean", "at MyWebKit, shouldOverrideUrlLoading," +
+                        "url is store, url is " + url);
                 // This is my web site, so do not override; let my WebView load the page
+                //updating the bottom navigation bar items
+                if (url.equals(getString(R.string.store_home_url))) {
+                    navigation.setSelectedItemId(R.id.navigation_home);
+                    setFragment(homeFragment, url);
+                } else if (url.contains("collections") || url.contains("products")) {
+                    //switch the navigation item selected
+                    Log.i("Sean", "at shouldOverrideUrlLoading. " +
+                            "Url contains products / collections. Url is " + url);
+                    navigation.setSelectedItemId(R.id.navigation_collections);
+                    mWebView.loadUrl(url);
+                } else if (url.contains("cart")) {
+                    navigation.setSelectedItemId(R.id.navigation_cart);
+                    setFragment(cartFragment, url);
+                } else {
+                    // TODO: 3/22/18 handle 'more' links within the app
+                    setFragment(meFragment, url);
+                }
                 return false;
             }else if (url.startsWith(getString(R.string.tel_url_search))) {
                 //Handle telephony Urls
-                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(url)));
+                Log.i("Sean", "at shouldOverrideUrlLoading, Url is " + url);
                 return true;
-            }else if (url.contains("instagram")){
-                Intent instaIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                instaIntent.setPackage("com.instagram.android");
-                try {
-                    startActivity(instaIntent);
-                } catch (ActivityNotFoundException e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                }
             }
-            //updating the Bottom navigation bar
-            else if (Uri.parse(url).getHost().contains(getString(R.string.store_collections_url)) ||
-                    Uri.parse(url).getHost().contains(getString(R.string.store_products_url_head))) {
-                Log.i("Sean", "at MyWebViewClient, url is " + url);
-                navigation.setSelectedItemId(R.id.navigation_collections);
-                mWebView.loadUrl(url);
-            }
+
             //if its any other link
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(url))); //open url in browser
             return true;
@@ -391,29 +379,43 @@ public class MainActivity extends AppCompatActivity {
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             final Uri uri = request.getUrl();
 
-            if (uri.toString().contains(getString(R.string.nyayozangucom_url_search)) || uri.toString().contains(getString(R.string.shopify_url_text))) {
-                    // This is my web site, so do not override; let my WebView load the page
+            if (uri.toString().contains(getString(R.string.nyayozangucom_url_search)) ||
+                    uri.toString().contains(getString(R.string.shopify_url_text))) {
+                // This is my web site, so do not override; let my WebView load the page
+                //update bottom navigation items
+                if (uri.toString().equals(getString(R.string.store_home_url))) {
+                    navigation.setSelectedItemId(R.id.navigation_home);
+                    setFragment(homeFragment, uri.toString());
+                } else if (uri.toString().contains("collections") || uri.toString().contains("products")) {
+                    //switch the navigation item selected
+                    Log.i("Sean", "at shouldOverrideUrlLoading. " +
+                            "Url contains products / collections. Url is " + uri.toString());
+                    navigation.setSelectedItemId(R.id.navigation_collections);
+                    mWebView.loadUrl(uri.toString());
+                } else if (uri.toString().contains("cart")) {
+                    navigation.setSelectedItemId(R.id.navigation_cart);
+                    setFragment(cartFragment, uri.toString());
+                } else {
+                    // TODO: 3/22/18 handle 'more' links within the app
+                    setFragment(meFragment, uri.toString());
+                }
+
                 return false;
-            } else if (uri.toString().startsWith(getString(R.string.mailto_url_search))) {
-                //Handle mail Urls
-                startActivity(new Intent(Intent.ACTION_SENDTO, uri));
             } else if (uri.toString().startsWith(getString(R.string.tel_url_search))) {
                 //Handle telephony Urls
                 startActivity(new Intent(Intent.ACTION_DIAL, uri));
-            }
-            //updating the Bottom Navigation Bar selected item
-            else if (uri.toString().contains(getString(R.string.store_products_url_head)) ||
-                    uri.toString().contains(getString(R.string.store_collections_url))) {
-                navigation.setSelectedItemId(R.id.navigation_collections);
-                mWebView.loadUrl(uri.toString());
             }
             //Handle Web Urls
             startActivity(new Intent(Intent.ACTION_VIEW, uri)); //open url in browser
             return true;
         }
 
-        //update Bottom NavigationView
-
-
+        //handle http errors
+        @Override
+        public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+            Log.i("Sean", "at onReceivedHttpError, error is " + errorResponse);
+            super.onReceivedHttpError(view, request, errorResponse);
+            showAlertScreen();
+        }
     }
 }

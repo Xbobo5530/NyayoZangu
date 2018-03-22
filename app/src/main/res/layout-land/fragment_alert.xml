@@ -21,7 +21,6 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <ImageView
-                    android:id="@+id/imageView"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center"
@@ -53,11 +52,10 @@
                     android:tint="@android:color/holo_red_light"/>
 
                 <TextView
-                    android:id="@+id/connecting_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/activity_horizontal_margin"
-                    android:text="@string/connction_error_message_text"
+                    android:text="@string/connection_error_message_text"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_red_light" />
 
