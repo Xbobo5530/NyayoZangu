@@ -27,16 +27,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
-        <!--<android.support.design.widget.FloatingActionButton
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
-            android:onClick="openLiveChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email"
+            android:background="@color/colorAccent"
+            android:onClick="openSearch"
+            android:tint="@color/colorWhite"
+            android:tintMode="src_atop"
+            app:rippleColor="@color/colorWhite"
+            app:srcCompat="@android:drawable/ic_search_category_default"
             tools:layout_editor_absoluteX="341dp"
-            tools:layout_editor_absoluteY="467dp" />-->
+            tools:layout_editor_absoluteY="467dp" />
 
     </FrameLayout>
 

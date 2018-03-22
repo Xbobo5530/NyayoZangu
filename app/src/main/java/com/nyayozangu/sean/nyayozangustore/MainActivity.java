@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private MoreFragment moreFragment;
     private ProgressBar mProgressBar;
     private BottomNavigationView navigation;
-
+    private FloatingActionButton mFab;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;{
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         //constructing elements
         mWebView = findViewById(R.id.webView);
         mProgressBar = findViewById(R.id.progress_bar);
+        mFab = findViewById(R.id.fab);
 
         //fragments
         homeFragment = new HomeFragment();
@@ -156,25 +158,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleDeepLinkIntent(Intent intent) {
-
-        // TODO: 3/18/18 fix the deepLinkIssue
-        /*
-        ATTENTION: This was auto-generated to handle app links.
-        Intent appLinkIntent = getIntent();
-        String appLinkAction = appLinkIntent.getAction();
-        Uri appLinkData = appLinkIntent.getData();
-        */
         Log.i("Sean", "at handleDeepLinkIntent");
         String appLinkAction = intent.getAction();
         Uri appLinkData = intent.getData();
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
-            String pageUrl = appLinkData.getLastPathSegment();
-            Uri appData = Uri.parse("https://store.nyayozangu.com").buildUpon()
-                    .appendPath(pageUrl).build();
-            //open the meFragment and load the appData url;
-            setFragment(homeFragment, getString(R.string.store_home_url));
-            mWebView.loadUrl(String.valueOf(appData));
-            Log.i("Sean", "at handleDeepLinkIntent, url is " + String.valueOf(appData));
+            String incomingUrl = String.valueOf(appLinkData);
+            Log.i("Sean", "incomingUrl is " + incomingUrl);
+            setFragment(homeFragment, incomingUrl);
         }
     }
 
@@ -214,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 mProgressBar.setProgress(progress);
-                if (progress > 35) {
+                if (progress > 40) {
                     Log.i("Sean", "at showProgressBar, progress is " + progress);
                     mProgressBar.setVisibility(ProgressBar.GONE);
                     mWebView.setVisibility(View.VISIBLE);
@@ -231,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
     public void checkConnection() {
         Log.i("Sean", "at checkConnection");
         if (isConnected()){
+            mFab.setVisibility(View.VISIBLE); //when connected show the fab
             if (mWebView.getUrl() == null){proceed();}
             else{
                 navigation.setSelectedItemId(navigation.getSelectedItemId());
@@ -257,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showAlertScreen() {
         Log.i("Sean", "at showAlertScreen, alert message is ");
+        mFab.setVisibility(View.INVISIBLE); //hide fab when alertScreen is visible
         setFragment(alertFragment, null);
         // TODO: 3/22/18 show the alert message
 
@@ -316,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void rotateReconnect(View view) {
+        //animate rotation on the alert screen
         ImageView reconnectAnimation;
         reconnectAnimation = findViewById(R.id.reconnect_image_view);
         Animation startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_once);
@@ -325,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
     public void openSearch(View view) {
         if (isConnected()) {
             setFragment(meFragment, getString(R.string.store_search_url));
+
         } else {
             checkConnection();
         }
@@ -344,8 +338,10 @@ public class MainActivity extends AppCompatActivity {
             if (Uri.parse(url).getHost().contains(getString(R.string.nyayozangucom_url_search))) {
                 Log.i("Sean", "at MyWebKit, shouldOverrideUrlLoading," +
                         "url is store, url is " + url);
-                // This is my web site, so do not override; let my WebView load the page
-                //updating the bottom navigation bar items
+                /*
+                This is my web site, so do not override; let my WebView load the page
+                updating the bottom navigation bar items
+                 */
                 if (url.equals(getString(R.string.store_home_url))) {
                     navigation.setSelectedItemId(R.id.navigation_home);
                     setFragment(homeFragment, url);
@@ -354,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("Sean", "at shouldOverrideUrlLoading. " +
                             "Url contains products / collections. Url is " + url);
                     navigation.setSelectedItemId(R.id.navigation_collections);
-                    mWebView.loadUrl(url);
+                    setFragment(collectionsFragment, url);
                 } else if (url.contains("cart")) {
                     navigation.setSelectedItemId(R.id.navigation_cart);
                     setFragment(cartFragment, url);
@@ -391,7 +387,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("Sean", "at shouldOverrideUrlLoading. " +
                             "Url contains products / collections. Url is " + uri.toString());
                     navigation.setSelectedItemId(R.id.navigation_collections);
-                    mWebView.loadUrl(uri.toString());
+                    setFragment(collectionsFragment, uri.toString());
                 } else if (uri.toString().contains("cart")) {
                     navigation.setSelectedItemId(R.id.navigation_cart);
                     setFragment(cartFragment, uri.toString());
