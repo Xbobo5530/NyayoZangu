@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "950350808061",
+    "firebase_url": "https://nyayo-zangu-store.firebaseio.com",
+    "project_id": "nyayo-zangu-store",
+    "storage_bucket": "nyayo-zangu-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950350808061:android:a55351bd1dd91e93",
+        "android_client_info": {
+          "package_name": "com.nyayozangu.sean.nyayozangustore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950350808061-goa0mhblgf0rrofmbbn3vbrhui61s4hk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nyayozangu.sean.nyayozangustore",
+            "certificate_hash": "2f4d9e7d126975ab780ad16f3f73fd5e8d946af8"
+          }
+        },
+        {
+          "client_id": "950350808061-gluktpdu33bgik6qronq5qobf9lfimht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk6f0SLSEOENzVAd3a_2HMkBeetKxUigg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950350808061-gluktpdu33bgik6qronq5qobf9lfimht.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

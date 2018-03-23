@@ -33,9 +33,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String EXTRA_MESSAGE = "com.nyayozangu.sean.nyayozangustore.CREATE_ACC_URL";
+    private FirebaseAnalytics mFirebaseAnalytics;
     private WebView mWebView;
     private FrameLayout mMainFrame;
     private RelativeLayout mFabBackground;
@@ -112,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         //constructing elements
         mWebView = findViewById(R.id.webView);
         mProgressBar = findViewById(R.id.progress_bar);
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchFab.setOnClickListener(this);
 
 
-        //fragments
+        //construct fragments
         homeFragment = new HomeFragment();
         collectionsFragment = new CollectionsFragment();
         meFragment = new MeFragment();
@@ -156,7 +162,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i("Sean", "at onCreate(), handling webView settings");
 
         mWebView.setWebViewClient(new MyWebViewClient()); //use settings from MyWebViewClient
-
 
         if (isConnected()) {
             Intent intent = getIntent();
