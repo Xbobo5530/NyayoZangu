@@ -30,7 +30,9 @@
         <RelativeLayout
             android:id="@+id/fab_background"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/search_fab"
@@ -39,7 +41,6 @@
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="160dp"
             android:layout_marginRight="@dimen/fab_margin"
-            android:onClick="openSearch"
             android:tint="@android:color/white"
             android:tintMode="src_in"
             android:visibility="invisible"
@@ -76,6 +77,14 @@
             app:pressedTranslationZ="12dp"
             app:rippleColor="@android:color/white"
             app:srcCompat="@android:drawable/ic_input_add" />
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:gravity="top"
+            android:visibility="invisible" />
     </FrameLayout>
 
 

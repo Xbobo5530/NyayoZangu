@@ -112,21 +112,21 @@ public final class R {
         public static final int large_icon_uri = 0x7f080069;
         public static final int light = 0x7f08006b;
         public static final int match_global_nicknames = 0x7f080072;
-        public static final int none = 0x7f08007f;
-        public static final int normal = 0x7f080080;
-        public static final int omnibox_title_section = 0x7f080084;
-        public static final int omnibox_url_section = 0x7f080085;
-        public static final int plain = 0x7f08008c;
-        public static final int radio = 0x7f080090;
-        public static final int rfc822 = 0x7f080092;
-        public static final int standard = 0x7f0800bb;
-        public static final int text = 0x7f0800c1;
-        public static final int text1 = 0x7f0800c2;
-        public static final int text2 = 0x7f0800c3;
-        public static final int thing_proto = 0x7f0800c9;
-        public static final int url = 0x7f0800de;
-        public static final int wide = 0x7f0800e3;
-        public static final int wrap_content = 0x7f0800e6;
+        public static final int none = 0x7f080081;
+        public static final int normal = 0x7f080082;
+        public static final int omnibox_title_section = 0x7f080086;
+        public static final int omnibox_url_section = 0x7f080087;
+        public static final int plain = 0x7f08008e;
+        public static final int radio = 0x7f080092;
+        public static final int rfc822 = 0x7f080094;
+        public static final int standard = 0x7f0800be;
+        public static final int text = 0x7f0800c4;
+        public static final int text1 = 0x7f0800c5;
+        public static final int text2 = 0x7f0800c6;
+        public static final int thing_proto = 0x7f0800cc;
+        public static final int url = 0x7f0800e1;
+        public static final int wide = 0x7f0800e6;
+        public static final int wrap_content = 0x7f0800e9;
     }
     public static final class integer {
         public static final int google_play_services_version = 0x7f090007;

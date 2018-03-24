@@ -38,5 +38,6 @@
     <string name="chooser_title">Share this page with</string>
     <string name="default_notification_channel_name">Updates</string>
     <string name="default_notification_channel_id">nz_default_channel</string>
+    <string name="search_view_query_hint_text">Search our store</string>
 
 </resources>

@@ -23,7 +23,8 @@
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
             <tools:validation testUrl="https://store.nyayozangu.com/collections/fashion" />
             <tools:validation testUrl="https://store.nyayozangu.com/collections/all" />
 

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar mProgressBar;
     private BottomNavigationView navigation;
     private FloatingActionButton mFab, mShareFab, mSearchFab;
+    private SearchView mSearchView;
 
     private HomeFragment homeFragment;
     private MeFragment meFragment;
@@ -135,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mProgressBar = findViewById(R.id.progress_bar);
         mMainFrame = findViewById(R.id.main_frame);
         mFabBackground = findViewById(R.id.fab_background);
+        mSearchView = findViewById(R.id.search_view);
 
         mFab = findViewById(R.id.fab);
         mShareFab = findViewById(R.id.share_fab);
@@ -197,6 +201,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             checkConnection();
         }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        onNewIntent(getIntent());
     }
 
     private void handleNotifications(Intent intent) {
@@ -266,9 +276,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mWebView.setVisibility(View.INVISIBLE);
                     }
 
-
                     mProgressBar.setProgress(progress);
-                    if (progress > 40) {
+                    if (progress > 50) {
                         Log.i(TAG, "at showProgressBar, progress is " + progress);
                         mProgressBar.setVisibility(ProgressBar.GONE);
                         mWebView.setVisibility(View.VISIBLE);
@@ -387,13 +396,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reconnectAnimation.startAnimation(startRotateAnimation);
     }
 
-    public void openSearch(View view) {
-        if (isConnected()) {
-            setFragment(meFragment, getString(R.string.store_search_url));
+    public void openSearch() {
+        Log.d(TAG, "at openSearch");
+        showSearchView();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                //get the query and process it
+                String query = String.valueOf(mSearchView.getQuery());
+                if (!query.isEmpty()) {
+                    String constructedUrl = searchItemUrlConstructor(query);
+                    setFragment(collectionsFragment, constructedUrl);
+                }
+                //restore search view state
+                hideSearchView();
+                return false;
+            }
 
-        } else {
-            checkConnection();
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+    }
+
+    private void showSearchView() {
+
+        if (navigation.getSelectedItemId() == R.id.navigation_more) {
+            navigation.setSelectedItemId(R.id.navigation_collections);
         }
+        //Load animation
+        Animation slide_down = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.slide_down);
+        mSearchView.startAnimation(slide_down);
+
+        mSearchView.setVisibility(View.VISIBLE);
+        mSearchView.setSubmitButtonEnabled(true);
+        mSearchView.setIconifiedByDefault(true);
+        mSearchView.setFocusable(true);
+        mSearchView.setIconified(false);
+        mSearchView.requestFocusFromTouch();
+        mSearchView.setQueryHint(getString(R.string.search_view_query_hint_text));
+        mFabBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideSearchView();
+                mFabBackground.setClickable(false);
+            }
+        });
+    }
+
+    private void hideSearchView() {
+        if (mSearchView.getVisibility() == View.VISIBLE) {
+            //load animation
+            Animation slide_up = AnimationUtils.loadAnimation(getApplicationContext(),
+                    R.anim.slide_up);
+            mSearchView.startAnimation(slide_up);
+            mSearchView.setQuery(String.valueOf(""), false);
+            mSearchView.setVisibility(View.GONE);
+        }
+    }
+
+    @Nullable
+    private String searchItemUrlConstructor(String query) {
+        Log.d(TAG, "at searchItemUrlConstructor");
+        String searchUrlHead = "https://store.nyayozangu.com/search?q=";
+        StringBuilder refinedSearchQuery = new StringBuilder();
+        for (int i = 0; i < query.length(); i++) {
+            if (query.substring(i).equals(" ")) {
+                refinedSearchQuery.append("+");
+            } else {
+                refinedSearchQuery.append(query.charAt(i));
+            }
+        }
+        Log.d(TAG, "refinedSearchQuery: " + refinedSearchQuery);
+        return searchUrlHead + refinedSearchQuery;
     }
 
     // TODO: 3/22/18 add liveChat
@@ -419,7 +496,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.search_fab:
                 //open search
                 animateFAB();
-                setFragment(meFragment, getString(R.string.store_search_url));
+                openSearch();
                 Log.d(TAG, "searchFab");
                 break;
         }

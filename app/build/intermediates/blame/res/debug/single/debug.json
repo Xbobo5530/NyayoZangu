@@ -732,6 +732,10 @@
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xxhdpi/requests_tutorial_image.png"
     },
     {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/anim_slide_down.xml.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/anim/slide_down.xml"
+    },
+    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout_design_navigation_item_separator.xml.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/efba14661ef1d1331412e43c7f28f3a6/res/layout/design_navigation_item_separator.xml"
     },
@@ -1474,6 +1478,10 @@
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_book_black_24dp.png.flat",
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xxxhdpi/ic_book_black_24dp.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/anim_slide_up.xml.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/anim/slide_up.xml"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
