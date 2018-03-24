@@ -4,13 +4,13 @@
             "outputFile": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rHK/values-zh-rHK.xml",
             "map": [
                 {
-                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/d1235544f2458297ec48cbe385886a74/res/values-zh-rHK/values.xml",
+                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.0.aar/79fe69c53ae6a8dfae33447b656f2d62/res/values-zh-rHK/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
-                        "startOffsets": "287",
+                        "startOffsets": "251",
                         "endColumns": "166",
-                        "endOffsets": "453"
+                        "endOffsets": "417"
                     },
                     "to": {
                         "startLines": "29",
@@ -30,21 +30,38 @@
                         "endOffsets": "145,252,375,468,568,650,747,855,931,1007,1085,1181,1277,1372,1469,1564,1662,1775,1869,1947,2049"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,39,40",
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,40,41",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,200,307,430,523,623,705,802,910,986,1062,1140,1236,1332,1427,1524,1619,1717,1830,4239,4317",
+                        "startOffsets": "105,200,307,430,523,623,705,802,910,986,1062,1140,1236,1332,1427,1524,1619,1717,1830,4340,4418",
                         "endColumns": "94,106,122,92,99,81,96,107,75,75,77,95,95,94,96,94,97,112,93,77,101",
-                        "endOffsets": "195,302,425,518,618,700,797,905,981,1057,1135,1231,1327,1422,1519,1614,1712,1825,1919,4312,4414"
+                        "endOffsets": "195,302,425,518,618,700,797,905,981,1057,1135,1231,1327,1422,1519,1614,1712,1825,1919,4413,4515"
                     }
                 },
                 {
-                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/2f3e892385a790bbce5d2dde8559527f/res/values-zh-rHK/values.xml",
+                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/firebase-messaging-12.0.0.aar/5f92d60bb7a904868515222ddd20d96a/res/values-zh-rHK/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "209",
+                        "endColumns": "96",
+                        "endOffsets": "305"
+                    },
+                    "to": {
+                        "startLines": "39",
+                        "startColumns": "4",
+                        "startOffsets": "4239",
+                        "endColumns": "100",
+                        "endOffsets": "4335"
+                    }
+                },
+                {
+                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.0.aar/cdc326e06eb4479d6e67c6843160d2e6/res/values-zh-rHK/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "285,384,544,657,757,923,1037,1165,1283,1452,1551,1711,1824,1990,2124,2205,2288",
+                        "startOffsets": "249,348,508,621,721,887,1001,1129,1247,1416,1515,1675,1788,1954,2088,2169,2252",
                         "endColumns": "98,159,112,99,165,113,127,117,168,98,159,112,165,133,80,82,96",
-                        "endOffsets": "383,543,656,756,922,1036,1164,1282,1451,1550,1710,1823,1989,2123,2204,2287,2384"
+                        "endOffsets": "347,507,620,720,886,1000,1128,1246,1415,1514,1674,1787,1953,2087,2168,2251,2348"
                     },
                     "to": {
                         "startLines": "21,22,23,24,25,26,27,28,30,31,32,33,34,35,36,37,38",

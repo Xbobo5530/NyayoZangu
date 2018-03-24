@@ -4,13 +4,13 @@
             "outputFile": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ne/values-ne.xml",
             "map": [
                 {
-                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/2f3e892385a790bbce5d2dde8559527f/res/values-ne/values.xml",
+                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.0.aar/cdc326e06eb4479d6e67c6843160d2e6/res/values-ne/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "281,394,584,716,831,1061,1195,1331,1461,1700,1816,2011,2146,2353,2531,2623,2721",
+                        "startOffsets": "245,358,548,680,795,1025,1159,1295,1425,1664,1780,1975,2110,2317,2495,2587,2685",
                         "endColumns": "112,189,131,114,229,133,135,129,238,115,194,134,206,177,91,97,116",
-                        "endOffsets": "393,583,715,830,1060,1194,1330,1460,1699,1815,2010,2145,2352,2530,2622,2720,2837"
+                        "endOffsets": "357,547,679,794,1024,1158,1294,1424,1663,1779,1974,2109,2316,2494,2586,2684,2801"
                     },
                     "to": {
                         "startLines": "21,22,23,24,25,26,27,28,30,31,32,33,34,35,36,37,38",
@@ -21,13 +21,13 @@
                     }
                 },
                 {
-                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-basement-11.8.0.aar/d1235544f2458297ec48cbe385886a74/res/values-ne/values.xml",
+                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.0.aar/79fe69c53ae6a8dfae33447b656f2d62/res/values-ne/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
-                        "startOffsets": "283",
+                        "startOffsets": "247",
                         "endColumns": "222",
-                        "endOffsets": "505"
+                        "endOffsets": "469"
                     },
                     "to": {
                         "startLines": "29",
@@ -35,6 +35,23 @@
                         "startOffsets": "3358",
                         "endColumns": "222",
                         "endOffsets": "3576"
+                    }
+                },
+                {
+                    "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/firebase-messaging-12.0.0.aar/5f92d60bb7a904868515222ddd20d96a/res/values-ne/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "205",
+                        "endColumns": "99",
+                        "endOffsets": "304"
+                    },
+                    "to": {
+                        "startLines": "39",
+                        "startColumns": "4",
+                        "startOffsets": "4982",
+                        "endColumns": "103",
+                        "endOffsets": "5081"
                     }
                 },
                 {
@@ -47,11 +64,11 @@
                         "endOffsets": "155,263,386,490,598,689,796,923,1017,1107,1195,1305,1421,1524,1639,1741,1856,1987,2099,2185,2286"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,39,40",
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,40,41",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,210,318,441,545,653,744,851,978,1072,1162,1250,1360,1476,1579,1694,1796,1911,2042,4982,5068",
+                        "startOffsets": "105,210,318,441,545,653,744,851,978,1072,1162,1250,1360,1476,1579,1694,1796,1911,2042,5086,5172",
                         "endColumns": "104,107,122,103,107,90,106,126,93,89,87,109,115,102,114,101,114,130,111,85,100",
-                        "endOffsets": "205,313,436,540,648,739,846,973,1067,1157,1245,1355,1471,1574,1689,1791,1906,2037,2149,5063,5164"
+                        "endOffsets": "205,313,436,540,648,739,846,973,1067,1157,1245,1355,1471,1574,1689,1791,1906,2037,2149,5167,5268"
                     }
                 }
             ]

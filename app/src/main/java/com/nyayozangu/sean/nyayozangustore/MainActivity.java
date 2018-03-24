@@ -34,24 +34,31 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String EXTRA_MESSAGE = "com.nyayozangu.sean.nyayozangustore.CREATE_ACC_URL";
+    private static final String TAG = "Sean";
+
     private FirebaseAnalytics mFirebaseAnalytics;
+
     private WebView mWebView;
     private FrameLayout mMainFrame;
     private RelativeLayout mFabBackground;
+    private ProgressBar mProgressBar;
+    private BottomNavigationView navigation;
+    private FloatingActionButton mFab, mShareFab, mSearchFab;
+
     private HomeFragment homeFragment;
     private MeFragment meFragment;
     private CartFragment cartFragment;
     private CollectionsFragment collectionsFragment;
     private AlertFragment alertFragment;
     private MoreFragment moreFragment;
-    private ProgressBar mProgressBar;
-    private BottomNavigationView navigation;
-    private FloatingActionButton mFab, mShareFab, mSearchFab;
+
     private Boolean isFabOpen;
+
     private Animation fab_open, fab_close, rotate_forward, rotate_backward;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
@@ -104,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (url != null) {
             mWebView.loadUrl(url);
         }
-        Log.i("Sean", "at setFragment, setting Fragment " + fragment.toString() +
+        Log.i(TAG, "at setFragment, setting Fragment " + fragment.toString() +
                 "\nloading mWebView, url is " + url);
     }
 
@@ -115,8 +122,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
+        //subscribe to app updates
+        FirebaseMessaging.getInstance().subscribeToTopic("UPDATES");
+        Log.d(TAG, "user subscribed to topic UPDATES");
+
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        // TODO: 3/23/18 finish setting up analytics
 
         //constructing elements
         mWebView = findViewById(R.id.webView);
@@ -138,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mShareFab.setOnClickListener(this);
         mSearchFab.setOnClickListener(this);
 
-
         //construct fragments
         homeFragment = new HomeFragment();
         collectionsFragment = new CollectionsFragment();
@@ -159,17 +170,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //getting javascript settings
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        Log.i("Sean", "at onCreate(), handling webView settings");
+        Log.i(TAG, "at onCreate(), handling webView settings");
 
         mWebView.setWebViewClient(new MyWebViewClient()); //use settings from MyWebViewClient
 
         if (isConnected()) {
-            Intent intent = getIntent();
+            Log.d(TAG, "at onCreate, checking connection\n" +
+                    "isConnected is: " + isConnected());
+            onNewIntent(getIntent());
             //determine if MainActivity is launched from createAccount
+            Intent intent = getIntent();
             if (intent.getStringExtra(EXTRA_MESSAGE) == null) {
+                /*
+                //opened from external links to deep links
+                handleDeepLinkIntent(getIntent());
+                //handle notifications
+                handleNotifications(getIntent());
+                */
                 proceed();
             } else {
-                Log.i("Sean", "at onCreate, gettingStringExtra, extra message is "
+                Log.i(TAG, "at onCreate, gettingStringExtra, extra message is "
                         + intent.getStringExtra(EXTRA_MESSAGE));
                 String createAccUrl = intent.getStringExtra(EXTRA_MESSAGE);
                 setFragment(meFragment, createAccUrl);
@@ -177,30 +197,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             checkConnection();
         }
-        //opened from external links to deep links
-        handleDeepLinkIntent(getIntent());
+    }
 
+    private void handleNotifications(Intent intent) {
+        Log.d(TAG, "at handleNotifications");
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            Log.d(TAG, "extras != null\n extras: " + extras);
+            if (extras.containsKey("targetUrl")) {
+                //extract the notification data(targetUrl)
+                String targetUrl = extras.getString("targetUrl");
+                Log.d(TAG, "targetUrl: " + targetUrl);
+                //set fragment and launch webView
+                setFragment(meFragment, targetUrl);
+            }
+        }
     }
 
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         handleDeepLinkIntent(intent);
+        handleNotifications(intent);
+
     }
 
     private void handleDeepLinkIntent(Intent intent) {
-        Log.i("Sean", "at handleDeepLinkIntent");
+        Log.i(TAG, "at handleDeepLinkIntent");
         String appLinkAction = intent.getAction();
         Uri appLinkData = intent.getData();
         if (Intent.ACTION_VIEW.equals(appLinkAction) && appLinkData != null) {
             String incomingUrl = String.valueOf(appLinkData);
-            Log.i("Sean", "incomingUrl is " + incomingUrl);
-            setFragment(homeFragment, incomingUrl);
+            Log.i(TAG, "incomingUrl is " + incomingUrl);
+            setFragment(collectionsFragment, incomingUrl);
         }
     }
 
     private void proceed() {
         setFragment(homeFragment, getString(R.string.store_home_url));
-        Log.i("Sean", "at proceed(url)");
+        Log.i(TAG, "at proceed(url)");
     }
 
     // TODO: 3/9/18 implement the onSavedInstance method to properly handle configuration changes
@@ -226,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mWebView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
                 if (isConnected()) {
-                    Log.i("Sean", "at showProgressBar, showing progressBar");
+                    Log.i(TAG, "at showProgressBar, showing progressBar");
                     if (progress < 100 && mProgressBar.getVisibility() == ProgressBar.GONE) {
                         mProgressBar.setVisibility(ProgressBar.VISIBLE);
                         mWebView.setVisibility(View.INVISIBLE);
@@ -235,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     mProgressBar.setProgress(progress);
                     if (progress > 40) {
-                        Log.i("Sean", "at showProgressBar, progress is " + progress);
+                        Log.i(TAG, "at showProgressBar, progress is " + progress);
                         mProgressBar.setVisibility(ProgressBar.GONE);
                         mWebView.setVisibility(View.VISIBLE);
                     }
@@ -249,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void checkConnection() {
-        Log.i("Sean", "at checkConnection");
+        Log.i(TAG, "at checkConnection");
         if (isConnected()) {
             mFab.setVisibility(View.VISIBLE); //when connected show the fab
             if (mWebView.getUrl() == null) {
@@ -259,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mWebView.loadUrl(mWebView.getUrl());
             }
         } else {
-            Log.i("Sean", "at checkConnection, disconnected");
+            Log.i(TAG, "at checkConnection, disconnected");
             showAlertScreen();
         }
     }
@@ -278,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showAlertScreen() {
-        Log.i("Sean", "at showAlertScreen, alert message is ");
+        Log.i(TAG, "at showAlertScreen, alert message is ");
         mFab.setVisibility(View.INVISIBLE); //hide fab when alertScreen is visible
         setFragment(alertFragment, null);
         // TODO: 3/22/18 show the alert message
@@ -380,13 +414,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.share_fab:
                 animateFAB();
                 shareCurrPage();
-                Log.d("Sean", "shareFab");
+                Log.d(TAG, "shareFab");
                 break;
             case R.id.search_fab:
                 //open search
                 animateFAB();
                 setFragment(meFragment, getString(R.string.store_search_url));
-                Log.d("Sean", "searchFab");
+                Log.d(TAG, "searchFab");
                 break;
         }
     }
@@ -401,7 +435,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             shareIntent.putExtra(Intent.EXTRA_TEXT, urlToShare);
             startActivity(Intent.createChooser(shareIntent, "Share this page with"));
         } catch (Exception e) {
-            Log.i("Sean", "at shareCurrPage, error is " + e.getMessage());
+            Log.i(TAG, "at shareCurrPage, error is " + e.getMessage());
         }
     }
 
@@ -416,7 +450,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mSearchFab.setClickable(false);
             isFabOpen = false;
             mFabBackground.setClickable(false);
-            Log.d("Sean", "close");
+            Log.d(TAG, "close");
 
         } else {
 
@@ -433,7 +467,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     animateFAB();
                 }
             });
-            Log.d("Sean", "open");
+            Log.d(TAG, "open");
 
         }
     }
@@ -445,7 +479,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (Uri.parse(url).getHost().contains(getString(R.string.nyayozangucom_url_search))) {
-                Log.i("Sean", "at MyWebKit, shouldOverrideUrlLoading," +
+                Log.i(TAG, "at MyWebKit, shouldOverrideUrlLoading," +
                         "url is store, url is " + url);
                 /*
                 This is my web site, so do not override; let my WebView load the page
@@ -456,7 +490,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     setFragment(homeFragment, url);
                 } else if (url.contains("collections") || url.contains("products")) {
                     //switch the navigation item selected
-                    Log.i("Sean", "at shouldOverrideUrlLoading. " +
+                    Log.i(TAG, "at shouldOverrideUrlLoading. " +
                             "Url contains products / collections. Url is " + url);
                     navigation.setSelectedItemId(R.id.navigation_collections);
                     setFragment(collectionsFragment, url);
@@ -470,7 +504,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
             } else if (url.startsWith(getString(R.string.tel_url_search))) {
                 //Handle telephony Urls
-                Log.i("Sean", "at shouldOverrideUrlLoading, Url is " + url);
+                Log.i(TAG, "at shouldOverrideUrlLoading, Url is " + url);
                 return true;
             }
             //if its any other link
@@ -492,7 +526,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     setFragment(homeFragment, uri.toString());
                 } else if (uri.toString().contains("collections") || uri.toString().contains("products")) {
                     //switch the navigation item selected
-                    Log.i("Sean", "at shouldOverrideUrlLoading. " +
+                    Log.i(TAG, "at shouldOverrideUrlLoading. " +
                             "Url contains products / collections. Url is " + uri.toString());
                     navigation.setSelectedItemId(R.id.navigation_collections);
                     setFragment(collectionsFragment, uri.toString());
@@ -517,7 +551,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //handle http errors
         @Override
         public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
-            Log.i("Sean", "at onReceivedHttpError, error is " + errorResponse);
+            Log.i(TAG, "at onReceivedHttpError, error is " + errorResponse);
             super.onReceivedHttpError(view, request, errorResponse);
             showAlertScreen();
         }

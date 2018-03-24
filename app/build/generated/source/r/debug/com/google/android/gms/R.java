@@ -83,10 +83,10 @@ public final class R {
         public static final int common_google_signin_btn_text_light_normal_background = 0x7f07006e;
         public static final int googleg_disabled_color_18 = 0x7f070076;
         public static final int googleg_standard_color_18 = 0x7f070077;
-        public static final int ic_plusone_medium_off_client = 0x7f070082;
-        public static final int ic_plusone_small_off_client = 0x7f070083;
-        public static final int ic_plusone_standard_off_client = 0x7f070084;
-        public static final int ic_plusone_tall_off_client = 0x7f070085;
+        public static final int ic_plusone_medium_off_client = 0x7f070083;
+        public static final int ic_plusone_small_off_client = 0x7f070084;
+        public static final int ic_plusone_standard_off_client = 0x7f070085;
+        public static final int ic_plusone_tall_off_client = 0x7f070086;
     }
     public static final class id {
         public static final int adjust_height = 0x7f08001b;
@@ -150,6 +150,7 @@ public final class R {
         public static final int common_open_on_phone = 0x7f0d003b;
         public static final int common_signin_button_text = 0x7f0d003c;
         public static final int common_signin_button_text_long = 0x7f0d003d;
+        public static final int fcm_fallback_notification_channel_label = 0x7f0d0047;
     }
     public static final class styleable {
         public static final int[] AppDataSearch = { };
