@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RelativeLayout mFabBackground;
     private ProgressBar mProgressBar;
     private BottomNavigationView navigation;
-    private FloatingActionButton mFab, mShareFab, mSearchFab;
+    private FloatingActionButton mFab, mShareFab, mSearchFab, mChatFab;
     private SearchView mSearchView;
 
     private HomeFragment homeFragment;
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Boolean isFabOpen;
 
     private Animation fab_open, fab_close, rotate_forward, rotate_backward;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
 
     {
@@ -106,18 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
     }
 
-    private void setFragment(Fragment fragment, String url) {
-        //set fragment, and pass on the url to load
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_frame, fragment);
-        fragmentTransaction.commit();
-        if (url != null) {
-            mWebView.loadUrl(url);
-        }
-        Log.i(TAG, "at setFragment, setting Fragment " + fragment.toString() +
-                "\nloading mWebView, url is " + url);
-    }
-
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFab = findViewById(R.id.fab);
         mShareFab = findViewById(R.id.share_fab);
         mSearchFab = findViewById(R.id.search_fab);
+        mChatFab = findViewById(R.id.chat_fab);
         isFabOpen = false;
 
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
@@ -209,6 +196,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         onNewIntent(getIntent());
     }
 
+    private void setFragment(Fragment fragment, String url) {
+        //set fragment, and pass on the url to load
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.commit();
+        if (url != null) {
+            mWebView.loadUrl(url);
+        }
+        Log.i(TAG, "at setFragment, setting Fragment " + fragment.toString() +
+                "\nloading mWebView, url is " + url);
+    }
+
     private void handleNotifications(Intent intent) {
         Log.d(TAG, "at handleNotifications");
         Bundle extras = intent.getExtras();
@@ -263,7 +262,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         webView.getSettings().setAllowFileAccess(true);
         webView.getSettings().setAppCacheEnabled(true);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT); // load online by default
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); // load online by default
+        //extra settings
+
     }
 
     private void showProgressBar() {
@@ -457,7 +458,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Nullable
     private String searchItemUrlConstructor(String query) {
         Log.d(TAG, "at searchItemUrlConstructor");
         String searchUrlHead = "https://store.nyayozangu.com/search?q=";
@@ -473,13 +473,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return searchUrlHead + refinedSearchQuery;
     }
 
-    // TODO: 3/22/18 add liveChat
-    /*public void openLiveChat(View view) {
-        //opening liveChat
-        setFragment(meFragment, getString(R.string.livechat_url));
-    }*/
+    public void openChat() {
+        //opening the chatActivity
+        Log.d(TAG, "at openChat");
+        startActivity(new Intent(getApplicationContext(), ChatActivity.class));
+        finish();
+    }
 
-    //for FAP animation
+
+    //for FAB animation
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -490,7 +492,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.share_fab:
                 animateFAB();
-                shareCurrPage();
+                sharePage();
                 Log.d(TAG, "shareFab");
                 break;
             case R.id.search_fab:
@@ -499,10 +501,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 openSearch();
                 Log.d(TAG, "searchFab");
                 break;
+            case R.id.chat_fab:
+                //openChat
+                animateFAB();
+                openChat();
+                Log.d(TAG, "chatFAB");
+                break;
         }
     }
 
-    private void shareCurrPage() {
+    private void sharePage() {
         try {
             String urlToShare = mWebView.getOriginalUrl();
 
@@ -512,7 +520,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             shareIntent.putExtra(Intent.EXTRA_TEXT, urlToShare);
             startActivity(Intent.createChooser(shareIntent, "Share this page with"));
         } catch (Exception e) {
-            Log.i(TAG, "at shareCurrPage, error is " + e.getMessage());
+            Log.i(TAG, "at sharePage, error is " + e.getMessage());
         }
     }
 
@@ -523,8 +531,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mFab.startAnimation(rotate_backward);
             mShareFab.startAnimation(fab_close);
             mSearchFab.startAnimation(fab_close);
+            mChatFab.startAnimation(fab_close);
             mShareFab.setClickable(false);
             mSearchFab.setClickable(false);
+            mChatFab.setClickable(false);
             isFabOpen = false;
             mFabBackground.setClickable(false);
             Log.d(TAG, "close");
@@ -534,8 +544,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mFab.startAnimation(rotate_forward);
             mShareFab.startAnimation(fab_open);
             mSearchFab.startAnimation(fab_open);
+            mChatFab.startAnimation(fab_open);
             mShareFab.setClickable(true);
             mSearchFab.setClickable(true);
+            mChatFab.setClickable(true);
             isFabOpen = true;
             mFabBackground.setClickable(true);
             mFabBackground.setOnClickListener(new View.OnClickListener() {
@@ -547,6 +559,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(TAG, "open");
 
         }
+    }
+
+    public void openChatTest(View view) {
+        openChat();
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -579,6 +595,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     setFragment(meFragment, url);
                 }
                 return false;
+            }
+            //for liveChat
+            else if (url.contains("twak.to/chat/")) {
+                return false;
             } else if (url.startsWith(getString(R.string.tel_url_search))) {
                 //Handle telephony Urls
                 Log.i(TAG, "at shouldOverrideUrlLoading, Url is " + url);
@@ -610,6 +630,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else if (uri.toString().contains("cart")) {
                     navigation.setSelectedItemId(R.id.navigation_cart);
                     setFragment(cartFragment, uri.toString());
+                } else if (uri.toString().contains("twak.to/chat/")) {
+                    return false;
                 } else {
                     // TODO: 3/22/18 handle 'more' links within the app
                     setFragment(meFragment, uri.toString());

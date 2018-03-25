@@ -168,7 +168,9 @@
                         android:text="@string/about_us_more_text"
                         android:textAppearance="?attr/textAppearanceListItem" />
                 </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 </FrameLayout>

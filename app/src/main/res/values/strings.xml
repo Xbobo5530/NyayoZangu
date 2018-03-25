@@ -34,7 +34,7 @@
     <string name="about_url">https://store.nyayozangu.com/pages/about-us</string>
     <string name="contact_url">https://store.nyayozangu.com/pages/contact-us</string>
     <string name="blog_url">https://store.nyayozangu.com/blogs/stories</string>
-    <string name="livechat_url">https://app.purechat.com/w/NyayoZanguStore</string>
+    <string name="livechat_url">https://tawk.to/chat/5ab7aac2d7591465c708e3c9/default/?$_tawk_popout=false</string>
     <string name="chooser_title">Share this page with</string>
     <string name="default_notification_channel_name">Updates</string>
     <string name="default_notification_channel_id">nz_default_channel</string>

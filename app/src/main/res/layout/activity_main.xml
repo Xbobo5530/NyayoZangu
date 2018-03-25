@@ -35,6 +35,22 @@
         </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/chat_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="230dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:onClick="openChatTest"
+            android:tint="@android:color/white"
+            android:tintMode="src_in"
+            android:visibility="invisible"
+            app:backgroundTint="@color/colorFAB2"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@mipmap/ic_chat_bubble_black_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/search_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +75,7 @@
             android:tint="@android:color/white"
             android:tintMode="src_in"
             android:visibility="invisible"
-            app:backgroundTint="@color/colorFAB1"
+            app:backgroundTint="@color/colorFAB2"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
             app:srcCompat="?attr/actionModeShareDrawable" />
@@ -83,6 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
+            android:elevation="3dp"
             android:gravity="top"
             android:visibility="invisible" />
     </FrameLayout>
@@ -95,7 +112,9 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimaryDark"
+        android:elevation="8dp"
         android:textAlignment="center"
+        app:elevation="8dp"
         app:itemIconTint="@color/nav_item"
         app:itemTextColor="@color/nav_item"
         app:menu="@menu/navigation" />

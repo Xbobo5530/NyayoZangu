@@ -8,12 +8,12 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_focused_holo.9.png.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-hdpi-v4/abc_list_focused_holo.9.png"
-    },
-    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_design_ic_visibility_off.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/efba14661ef1d1331412e43c7f28f3a6/res/drawable-xxxhdpi-v4/design_ic_visibility_off.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_focused_holo.9.png.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-hdpi-v4/abc_list_focused_holo.9.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable_abc_edit_text_material.xml.flat",
@@ -68,20 +68,20 @@
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/layout/fragment_alert.xml"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi_requests_tutorial_image.png.flat",
-        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-hdpi/requests_tutorial_image.png"
-    },
-    {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_logo_white.png.flat",
-        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xhdpi/ic_logo_white.png"
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_home_black_24dp.png.flat",
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-hdpi/ic_home_black_24dp.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_logo_white.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xhdpi/ic_logo_white.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi_requests_tutorial_image.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-hdpi/requests_tutorial_image.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_focused_holo.9.png.flat",
@@ -120,12 +120,12 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-mdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_longpressed_holo.9.png.flat",
-        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
-    },
-    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-mdpi-v4/abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_longpressed_holo.9.png.flat",
+        "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout_activity_tutorial.xml.flat",
@@ -196,12 +196,12 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-xxhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_search_black_24dp.png.flat",
-        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xxhdpi/ic_search_black_24dp.png"
-    },
-    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable_abc_ic_arrow_drop_right_black_24dp.xml.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_search_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xxhdpi/ic_search_black_24dp.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/color-v23_design_tint_password_toggle.xml.flat",
@@ -416,6 +416,10 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/layout/abc_action_bar_up_container.xml"
     },
     {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_chat_bubble_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/mipmap-mdpi/ic_chat_bubble_black_24dp.png"
+    },
+    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
@@ -510,6 +514,10 @@
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_chat_bubble_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/mipmap-hdpi/ic_chat_bubble_black_24dp.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout-v21_notification_template_icon_group.xml.flat",
@@ -1268,6 +1276,10 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/efba14661ef1d1331412e43c7f28f3a6/res/drawable-xxxhdpi-v4/design_ic_visibility.png"
     },
     {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_chat_bubble_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/mipmap-xhdpi/ic_chat_bubble_black_24dp.png"
+    },
+    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable_ic_dashboard_black_24dp.xml.flat",
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable/ic_dashboard_black_24dp.xml"
     },
@@ -1778,6 +1790,10 @@
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_ic_plusone_small_off_client.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-plus-12.0.0.aar/411719da7adc84283fb977387e07e23d/res/drawable-mdpi-v4/ic_plusone_small_off_client.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout_activity_chat.xml.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/layout/activity_chat.xml"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
@@ -2300,6 +2316,10 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/7fa337d4dea27b309888ad8aa9dce826/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png"
     },
     {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_chat_bubble_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/mipmap-xxxhdpi/ic_chat_bubble_black_24dp.png"
+    },
+    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_light.xml.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable/abc_list_selector_holo_light.xml"
     },
@@ -2534,6 +2554,10 @@
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/anim_abc_slide_out_top.xml.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_chat_bubble_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/mipmap-xxhdpi/ic_chat_bubble_black_24dp.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
