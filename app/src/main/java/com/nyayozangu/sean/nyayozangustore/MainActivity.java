@@ -5,19 +5,21 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -33,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -41,9 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String EXTRA_MESSAGE = "com.nyayozangu.sean.nyayozangustore.CREATE_ACC_URL";
     private static final String TAG = "Sean";
-
+    boolean doubleBackToExitPressedOnce = false;
     private FirebaseAnalytics mFirebaseAnalytics;
-
     private WebView mWebView;
     private FrameLayout mMainFrame;
     private RelativeLayout mFabBackground;
@@ -51,18 +53,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BottomNavigationView navigation;
     private FloatingActionButton mFab, mShareFab, mSearchFab, mChatFab;
     private SearchView mSearchView;
-
     private HomeFragment homeFragment;
     private MeFragment meFragment;
     private CartFragment cartFragment;
     private CollectionsFragment collectionsFragment;
     private AlertFragment alertFragment;
     private MoreFragment moreFragment;
-
     private Boolean isFabOpen;
-
     private Animation fab_open, fab_close, rotate_forward, rotate_backward;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
+
 
     {
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -190,6 +190,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // TODO: 3/9/18 implement the onSavedInstance method to properly handle configuration changes
+
+    /*@Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        mWebView.saveState(savedInstanceState);
+        savedInstanceState.putString("savedUrl", mWebView.getUrl());
+
+    }*/
+
+    // TODO: 3/9/18 implement onRestoreInstance methods to handle configuration changes
+    /*@Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mWebView.restoreState(savedInstanceState);
+
+        String savedUrl = savedInstanceState.getString("savedUrl");
+        mWebView.loadUrl(savedUrl);
+
+    }*/
+
     @Override
     protected void onPostResume() {
         super.onPostResume();
@@ -245,9 +266,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setFragment(homeFragment, getString(R.string.store_home_url));
         Log.i(TAG, "at proceed(url)");
     }
-
-    // TODO: 3/9/18 implement the onSavedInstance method to properly handle configuration changes
-    // TODO: 3/9/18 implement onRestoreInstance methods to handle configuration changes
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -374,19 +392,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // Check if the key event was the Back button and if there's history
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-            if (!mWebView.getUrl().equals(getString(R.string.store_home_url))) {
-                mWebView.goBack();
-                return true;
-            } else {
-                finish();
-            }//if at home url, pressing back exits the app
+    public void onBackPressed() {
+
+        //back button is pressed
+        Log.i(TAG, "at onBackPressed: back is pressed");
+        //check if webView has history
+
+        if (mWebView.canGoBack() && !mWebView.getUrl().equals(getString(R.string.store_home_url))) {
+            mWebView.goBack();
+        } else {
+            doubleBackToExit();
         }
-        // If it wasn't the Back key or there's no web page history, bubble up to the default
-        // system behavior (probably exit the activity)
-        return super.onKeyDown(keyCode, event);
+    }
+
+    public void doubleBackToExit() {
+        if (doubleBackToExitPressedOnce) {
+            Log.d(TAG, "pressed");
+            //back button is pressed for the first time
+            super.onBackPressed();
+            return;
+        }
+        //change the back button pressed once true
+        this.doubleBackToExitPressedOnce = true;
+        promptExit();
+        //create a delay to listen to the second time back is ressed
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //when the 2 seconds pass reset the number of counts back is pressed
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+    }
+
+    public void promptExit() {
+        Snackbar.make(mMainFrame,
+                "Are you you want to exit?",
+                Snackbar.LENGTH_LONG)
+                .setAction("Exit", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light))
+                .show();
     }
 
     public void rotateReconnect(View view) {
@@ -430,8 +480,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Animation slide_down = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.slide_down);
         mSearchView.startAnimation(slide_down);
-
         mSearchView.setVisibility(View.VISIBLE);
+
+        //editing the text color and hints of the searchView
+        int textViewId = mSearchView.getContext()
+                .getResources()
+                .getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = mSearchView.findViewById(textViewId);
+        textView.setTextColor(Color.WHITE);
+        textView.setHintTextColor(getResources().getColor(R.color.colorWhiteTransparent));
+
         mSearchView.setSubmitButtonEnabled(true);
         mSearchView.setIconifiedByDefault(true);
         mSearchView.setFocusable(true);
@@ -477,9 +535,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //opening the chatActivity
         Log.d(TAG, "at openChat");
         startActivity(new Intent(getApplicationContext(), ChatActivity.class));
-        finish();
+        /*finish();*/
     }
-
 
     //for FAB animation
     @Override
@@ -640,6 +697,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return false;
             } else if (uri.toString().startsWith(getString(R.string.tel_url_search))) {
                 //Handle telephony Urls
+                // TODO: 3/26/18 follow the crash on phone call bug
                 startActivity(new Intent(Intent.ACTION_DIAL, uri));
             }
             //Handle Web Urls

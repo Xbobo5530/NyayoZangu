@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.webkit.WebView;
 
 import com.jivosite.sdk.JivoDelegate;
@@ -48,8 +47,10 @@ public class ChatActivity extends Activity implements JivoDelegate {
 
     @Override
     public void onEvent(String name, String data) {
+        /*
         Log.d(TAG, "at onEvent:\nname is: " +
                 name + "\ndata is: " + data);
+        */
         if (name.equals("url.click")) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(data));
             startActivity(browserIntent);
@@ -61,7 +62,7 @@ public class ChatActivity extends Activity implements JivoDelegate {
 
     }
 
-    @Override
+    /*@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // Check if the key event was the Back button
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -72,5 +73,12 @@ public class ChatActivity extends Activity implements JivoDelegate {
         // If it wasn't the Back key or there's no web page history, bubble up to the default
         // system behavior (probably exit the activity)
         return super.onKeyDown(keyCode, event);
+    }*/
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+        /*super.onBackPressed();*/
     }
 }

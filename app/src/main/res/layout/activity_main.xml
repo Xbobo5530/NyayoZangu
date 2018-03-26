@@ -39,31 +39,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginBottom="230dp"
+            android:layout_marginBottom="210dp"
             android:layout_marginRight="@dimen/fab_margin"
             android:onClick="openChatTest"
             android:tint="@android:color/white"
             android:tintMode="src_in"
             android:visibility="invisible"
-            app:backgroundTint="@color/colorFAB2"
+            app:backgroundTint="@color/colorAccent"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
-            app:srcCompat="@mipmap/ic_chat_bubble_black_24dp" />
+            app:srcCompat="@drawable/ic_chat_white_24dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/search_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginBottom="160dp"
+            android:layout_marginBottom="150dp"
             android:layout_marginRight="@dimen/fab_margin"
             android:tint="@android:color/white"
-            android:tintMode="src_in"
             android:visibility="invisible"
-            app:backgroundTint="@color/colorFAB2"
+            app:backgroundTint="@color/colorAccent"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
-            app:srcCompat="@drawable/ic_search_black_24dp" />
+            app:srcCompat="@drawable/ic_search_white_24dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/share_fab"
@@ -73,12 +72,11 @@
             android:layout_marginBottom="90dp"
             android:layout_marginRight="@dimen/fab_margin"
             android:tint="@android:color/white"
-            android:tintMode="src_in"
             android:visibility="invisible"
-            app:backgroundTint="@color/colorFAB2"
+            app:backgroundTint="@color/colorAccent"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
-            app:srcCompat="?attr/actionModeShareDrawable" />
+            app:srcCompat="@drawable/ic_share_white_24dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -87,20 +85,27 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:tint="@android:color/white"
-            android:tintMode="src_in"
-            app:backgroundTint="@color/colorAccent"
+            app:backgroundTint="@android:color/holo_red_dark"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
             app:rippleColor="@android:color/white"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@drawable/ic_add_white_24dp" />
 
         <SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:background="@color/colorAccent"
+            android:closeIcon="@drawable/ic_close_white_24dp"
             android:elevation="3dp"
+            android:foregroundTint="@color/colorWhite"
+            android:foregroundTintMode="src_in"
+            android:goIcon="@drawable/ic_navigate_next_white_24dp"
             android:gravity="top"
+            android:inputType="textAutoComplete"
+            android:searchHintIcon="@drawable/ic_search_white_24dp"
+            android:searchIcon="@drawable/ic_search_white_24dp"
+            android:theme="@style/AppTheme"
             android:visibility="invisible" />
     </FrameLayout>
 
@@ -118,5 +123,4 @@
         app:itemIconTint="@color/nav_item"
         app:itemTextColor="@color/nav_item"
         app:menu="@menu/navigation" />
-
 </RelativeLayout>
