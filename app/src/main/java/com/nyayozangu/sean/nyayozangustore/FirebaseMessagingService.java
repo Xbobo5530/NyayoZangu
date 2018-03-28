@@ -69,7 +69,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setSmallIcon(R.drawable.ic_notif_icon)
                 .setContentTitle(title)
                 .setContentText(messageBody)
-                .setColor(getColor(R.color.colorPrimaryDark))
+                .setColor(getResources().getColor(R.color.colorPrimaryDark))
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)

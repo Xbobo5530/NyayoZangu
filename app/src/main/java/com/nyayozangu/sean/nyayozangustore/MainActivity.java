@@ -2,9 +2,11 @@ package com.nyayozangu.sean.nyayozangustore;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -40,11 +42,18 @@ import android.widget.TextView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String EXTRA_MESSAGE = "com.nyayozangu.sean.nyayozangustore.CREATE_ACC_URL";
     private static final String TAG = "Sean";
+
     boolean doubleBackToExitPressedOnce = false;
+    //WebView states
+    Bundle inState;
+    Bundle outState;
     private FirebaseAnalytics mFirebaseAnalytics;
     private WebView mWebView;
     private FrameLayout mMainFrame;
@@ -62,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Boolean isFabOpen;
     private Animation fab_open, fab_close, rotate_forward, rotate_backward;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
-
+    private ProgressDialog mProgressDialog;
+    private List<String> urls = new ArrayList<>();
 
     {
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,38 +81,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        if (isConnected()) {
-                            setFragment(homeFragment, getString(R.string.store_home_url));
-                            return true;
-                        }
-                        checkConnection();
+                        setFragment(homeFragment, getString(R.string.store_home_url));
                         return true;
                     case R.id.navigation_collections:
-                        if (isConnected()) {
-                            setFragment(collectionsFragment, getString(R.string.store_collections_url));
-                            return true;
-                        }
-                        checkConnection();
+                        setFragment(collectionsFragment, getString(R.string.store_collections_url));
                         return true;
                     case R.id.navigation_cart:
-                        if (isConnected()) {
-                            setFragment(cartFragment, getString(R.string.store_cart_url));
-                            return true;
-                        }
-                        checkConnection();
+                        setFragment(cartFragment, getString(R.string.store_cart_url));
                         return true;
                     case R.id.navigation_more:
-                        if (isConnected()) {
-                            setFragment(moreFragment, null);
-                            return true;
-                        }
-                        checkConnection();
+                        setFragment(moreFragment, null);
                         return true;
                 }
                 return false;
             }
         };
     }
+
+    // TODO: 3/28/18 when returning from the chatActivity restore mWebView
+
+    // TODO: 3/9/18 implement the onSavedInstance method to properly handle configuration changes
+
+    /*@Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        mWebView.saveState(savedInstanceState);
+        savedInstanceState.putString("savedUrl", mWebView.getUrl());
+
+    }*/
+
+    // TODO: 3/9/18 implement onRestoreInstance methods to handle configuration changes
+    /*@Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mWebView.restoreState(savedInstanceState);
+
+        String savedUrl = savedInstanceState.getString("savedUrl");
+        mWebView.loadUrl(savedUrl);
+
+    }*/
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -121,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //constructing elements
         mWebView = findViewById(R.id.webView);
-        mProgressBar = findViewById(R.id.progress_bar);
         mMainFrame = findViewById(R.id.main_frame);
         mFabBackground = findViewById(R.id.fab_background);
         mSearchView = findViewById(R.id.search_view);
@@ -152,7 +168,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         BottomNavigationViewHelper.disableShiftMode(navigation);
-        showProgressBar(); //load page display the loading progress bar
+
+        showProgress(); //load page display the loading progress bar
 
         //create new webView and handle cache
         WebView webView = new WebView(getApplicationContext());
@@ -168,19 +185,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (isConnected()) {
             Log.d(TAG, "at onCreate, checking connection\n" +
                     "isConnected is: " + isConnected());
-            onNewIntent(getIntent());
             //determine if MainActivity is launched from createAccount
             Intent intent = getIntent();
             if (intent.getStringExtra(EXTRA_MESSAGE) == null) {
-                /*
-                //opened from external links to deep links
-                handleDeepLinkIntent(getIntent());
-                //handle notifications
-                handleNotifications(getIntent());
-                */
-                proceed();
+                //not coming from create acc
+                if (getIntent().getData() != null) {
+                    //checking for deep links
+                    onNewIntent(getIntent());
+                } else {
+                    //no deep link data
+                    proceed();
+                }
             } else {
-                Log.i(TAG, "at onCreate, gettingStringExtra, extra message is "
+                //coming from create account
+                Log.i(TAG, "gettingStringExtra, extra message is "
                         + intent.getStringExtra(EXTRA_MESSAGE));
                 String createAccUrl = intent.getStringExtra(EXTRA_MESSAGE);
                 setFragment(meFragment, createAccUrl);
@@ -190,39 +208,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // TODO: 3/9/18 implement the onSavedInstance method to properly handle configuration changes
-
-    /*@Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        mWebView.saveState(savedInstanceState);
-        savedInstanceState.putString("savedUrl", mWebView.getUrl());
-
-    }*/
-
-    // TODO: 3/9/18 implement onRestoreInstance methods to handle configuration changes
-    /*@Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        mWebView.restoreState(savedInstanceState);
-
-        String savedUrl = savedInstanceState.getString("savedUrl");
-        mWebView.loadUrl(savedUrl);
-
-    }*/
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        onNewIntent(getIntent());
-    }
-
     private void setFragment(Fragment fragment, String url) {
         //set fragment, and pass on the url to load
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
         if (url != null) {
+            // TODO: 3/28/18 check if there are saved pages
             mWebView.loadUrl(url);
         }
         Log.i(TAG, "at setFragment, setting Fragment " + fragment.toString() +
@@ -248,7 +240,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onNewIntent(intent);
         handleDeepLinkIntent(intent);
         handleNotifications(intent);
-
     }
 
     private void handleDeepLinkIntent(Intent intent) {
@@ -260,11 +251,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i(TAG, "incomingUrl is " + incomingUrl);
             setFragment(collectionsFragment, incomingUrl);
         }
+
     }
 
     private void proceed() {
         setFragment(homeFragment, getString(R.string.store_home_url));
-        Log.i(TAG, "at proceed(url)");
+        Log.i(TAG, "at proceed()");
     }
 
     @Override
@@ -285,25 +277,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void showProgressBar() {
+    private void showProgress() {
+        //construct the progressDialog
+        mProgressDialog = new ProgressDialog(this);
         mWebView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
                 if (isConnected()) {
-                    Log.i(TAG, "at showProgressBar, showing progressBar");
-                    if (progress < 100 && mProgressBar.getVisibility() == ProgressBar.GONE) {
-                        mProgressBar.setVisibility(ProgressBar.VISIBLE);
-                        mWebView.setVisibility(View.INVISIBLE);
-                    }
-
-                    mProgressBar.setProgress(progress);
-                    if (progress > 50) {
-                        Log.i(TAG, "at showProgressBar, progress is " + progress);
-                        mProgressBar.setVisibility(ProgressBar.GONE);
-                        mWebView.setVisibility(View.VISIBLE);
+                    if (progress < 40) {
+                        mProgressDialog.setMessage("Loading...");
+                        mProgressDialog.show();
+                    } else {
+                        mProgressDialog.dismiss();
                     }
                 } else {
-                    mProgressBar.setVisibility(ProgressBar.GONE);
-                    mWebView.setVisibility(View.GONE);
                     checkConnection();
                 }
             }
@@ -314,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i(TAG, "at checkConnection");
         if (isConnected()) {
             mFab.setVisibility(View.VISIBLE); //when connected show the fab
+            mWebView.setVisibility(View.VISIBLE); //show webView
             if (mWebView.getUrl() == null) {
                 proceed();
             } else {
@@ -387,27 +374,95 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void reConnect(View view) {
+        //when the retry button is check the connection;
         rotateReconnect(view);
-        checkConnection();//when the retry button is check the connection;
+        checkConnection();
     }
 
     @Override
     public void onBackPressed() {
-
         //back button is pressed
         Log.i(TAG, "at onBackPressed: back is pressed");
         //check if webView has history
 
-        if (mWebView.canGoBack() && !mWebView.getUrl().equals(getString(R.string.store_home_url))) {
+        if (mWebView.getUrl() != null &&
+                !mWebView.getUrl().equals(getString(R.string.store_home_url)) &&
+                mWebView.canGoBack()) {
+            Log.d(TAG, "not at home\n mWebView can go back");
+            /*
+            * mWebView is not null
+            * mwWebView is not at home
+            * has history
+            * the urls have content
+            */
+
+            //launch the previous page
             mWebView.goBack();
+            Log.d(TAG, "going back");
+
+            // TODO: 3/29/18 handle update bottom nav btn on backPressed
+
+            /*
+            mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
+                            Log.d(TAG, "home is selected from back");
+                            setFragment(homeFragment, urls.get(0));
+                            return true;
+                        case R.id.navigation_collections:
+                            setFragment(collectionsFragment, urls.get(0));
+                            return true;
+                        case R.id.navigation_cart:
+                            setFragment(cartFragment, urls.get(0));
+                            return true;
+                    }
+                    return false;
+                }
+            };
+
+
+            //update bottom navigation
+            if (urls.get(0).contains("collections") &&
+                    urls.get(0).contains("products")){
+                Log.d(TAG,"contains collections/products: " + urls.get(0));
+                navigation.setSelectedItemId(R.id.navigation_collections);
+            }else if (urls.get(0).contains("cart")){
+                Log.d(TAG,"contains cart: " + urls.get(0));
+                navigation.setSelectedItemId(R.id.navigation_cart);
+            }
+            else{
+                Log.d(TAG,"contains else: " + urls.get(0));
+                navigation.setSelectedItemId(R.id.navigation_home);
+            }*/
+
+            //update urls
+            if (urls.size() > 0) {
+                urls.remove(0);
+            }
+
         } else {
+            /*
+            * webView at home page
+            * webView has no history
+            * Urls list is empty*/
+            Log.d(TAG, "clearing urls\n ");
+            for (int i = 1; i < urls.size() - 1; i++) {
+                Log.d(TAG, "clearing: " + urls.get(i));
+                urls.remove(i);
+            }
+
             doubleBackToExit();
+
         }
     }
 
     public void doubleBackToExit() {
+        Log.d(TAG, "at doubleBackToExit");
+
         if (doubleBackToExitPressedOnce) {
-            Log.d(TAG, "pressed");
+            Log.d(TAG, "pressed once");
             //back button is pressed for the first time
             super.onBackPressed();
             return;
@@ -535,7 +590,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //opening the chatActivity
         Log.d(TAG, "at openChat");
         startActivity(new Intent(getApplicationContext(), ChatActivity.class));
-        /*finish();*/
     }
 
     //for FAB animation
@@ -570,7 +624,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void sharePage() {
         try {
             String urlToShare = mWebView.getOriginalUrl();
-
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
@@ -638,7 +691,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (url.equals(getString(R.string.store_home_url))) {
                     navigation.setSelectedItemId(R.id.navigation_home);
                     setFragment(homeFragment, url);
-                } else if (url.contains("collections") || url.contains("products")) {
+                } else if (url.contains("collections") ||
+                        url.contains("products")) {
                     //switch the navigation item selected
                     Log.i(TAG, "at shouldOverrideUrlLoading. " +
                             "Url contains products / collections. Url is " + url);
@@ -671,10 +725,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             final Uri uri = request.getUrl();
 
-            if (uri.toString().contains(getString(R.string.nyayozangucom_url_search)) ||
-                    uri.toString().contains(getString(R.string.shopify_url_text))) {
-                // This is my web site, so do not override; let my WebView load the page
-                //update bottom navigation items
+            if (uri.toString().contains(getString(R.string.nyayozangucom_url_search))) {
+                /*
+                * let webView load the page
+                * update bottomNavBar
+                */
                 if (uri.toString().equals(getString(R.string.store_home_url))) {
                     navigation.setSelectedItemId(R.id.navigation_home);
                     setFragment(homeFragment, uri.toString());
@@ -690,7 +745,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else if (uri.toString().contains("twak.to/chat/")) {
                     return false;
                 } else {
-                    // TODO: 3/22/18 handle 'more' links within the app
                     setFragment(meFragment, uri.toString());
                 }
 
@@ -710,7 +764,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
             Log.i(TAG, "at onReceivedHttpError, error is " + errorResponse);
             super.onReceivedHttpError(view, request, errorResponse);
-            showAlertScreen();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (errorResponse.getStatusCode() == ERROR_TIMEOUT) {
+                    showAlertScreen();
+                } else {
+
+                    //show snack bar
+                    Snackbar.make(mMainFrame,
+                            "Unstable connection...",
+                            Snackbar.LENGTH_LONG)
+                            .setAction("Reconnect", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    checkConnection();
+                                }
+                            })
+                            .setActionTextColor(getResources().getColor(R.color.colorAccent))
+                            .show();
+                }
+            } else {
+                showAlertScreen();
+            }
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+
+            Log.d(TAG, "at onPageStarted \n");
+
+            //check if webView nav if is back or forward
+            if (!mWebView.canGoForward() && urls.size() != 0) {
+                Log.d(TAG, "at latest page");
+                if (urls.size() > 1) {//urls has more than one item
+                    if (!urls.get(0).equals(urls.get(1))) {//when item @0 != item @1
+                        urls.add(0, url);
+                        Log.d(TAG, "url added: " + urls.get(0) +
+                                "\nurls size is: " + urls.size() +
+                                "\nurls are: " + urls.toString());
+                    } else if (urls.size() == 1 &&
+                            !urls.get(0).equals(getString(R.string.store_home_url))) {
+                        urls.add(0, url);
+                        Log.d(TAG, "url added: " + urls.get(0) +
+                                "\nurls size is: " + urls.size() +
+                                "\nurls are: " + urls.toString());
+                    }
+                } else {
+                    urls.add(0, url);
+                    Log.d(TAG, "url added: " + urls.get(0) +
+                            "\nurls size is: " + urls.size() +
+                            "\nurls are: " + urls.toString());
+                }
+            }
+            super.onPageStarted(view, url, favicon);
         }
     }
 
