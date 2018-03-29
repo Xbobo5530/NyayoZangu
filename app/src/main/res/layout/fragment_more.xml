@@ -63,29 +63,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="openProductRequests"
-                    android:orientation="horizontal"
-                    tools:ignore="OnClick">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:contentDescription="@string/explore_icon_more_desc"
-                        android:src="@drawable/ic_explore_black_24dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/text_margin"
-                        android:text="@string/product_requests_more_text"
-                        android:textAppearance="?attr/textAppearanceListItem" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:onClick="openBlog"
                     android:orientation="horizontal"
                     tools:ignore="OnClick">

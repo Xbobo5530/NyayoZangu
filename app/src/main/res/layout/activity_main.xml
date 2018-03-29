@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.nyayozangu.sean.nyayozangustore.MainActivity">
 
-
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
@@ -19,20 +18,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!--
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            style="@style/Base.Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-        -->
+        <ListView
+            android:id="@+id/more_list_view"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"></ListView>
 
         <RelativeLayout
             android:id="@+id/fab_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
         </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
@@ -40,9 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginBottom="210dp"
+            android:layout_marginBottom="270dp"
             android:layout_marginRight="@dimen/fab_margin"
-            android:onClick="openChatTest"
             android:tint="@android:color/white"
             android:tintMode="src_in"
             android:visibility="invisible"
@@ -50,6 +45,21 @@
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
             app:srcCompat="@drawable/ic_chat_white_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/request_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="210dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:tint="@android:color/white"
+            android:tintMode="src_in"
+            android:visibility="invisible"
+            app:backgroundTint="@color/colorAccent"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/ic_explore_white_24dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/search_fab"

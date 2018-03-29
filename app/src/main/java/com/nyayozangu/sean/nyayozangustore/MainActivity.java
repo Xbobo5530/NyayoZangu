@@ -32,9 +32,11 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -51,16 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "Sean";
 
     boolean doubleBackToExitPressedOnce = false;
-    //WebView states
-    Bundle inState;
-    Bundle outState;
     private FirebaseAnalytics mFirebaseAnalytics;
     private WebView mWebView;
     private FrameLayout mMainFrame;
     private RelativeLayout mFabBackground;
-    private ProgressBar mProgressBar;
     private BottomNavigationView navigation;
-    private FloatingActionButton mFab, mShareFab, mSearchFab, mChatFab;
+    private FloatingActionButton mFab, mShareFab, mSearchFab, mChatFab, mRequestFab;
     private SearchView mSearchView;
     private HomeFragment homeFragment;
     private MeFragment meFragment;
@@ -74,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressDialog mProgressDialog;
     private List<String> urls = new ArrayList<>();
 
+    private ListView mMoreList;
+
+
+    // TODO: 3/28/18 when returning from the chatActivity restore mWebView
+
     {
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
             //on selecting bottom navigation item
@@ -81,45 +84,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        setFragment(homeFragment, getString(R.string.store_home_url));
+                        if (navigation.getSelectedItemId() != R.id.navigation_home) {
+                            setFragment(homeFragment, getString(R.string.store_home_url));
+                        }
                         return true;
                     case R.id.navigation_collections:
-                        setFragment(collectionsFragment, getString(R.string.store_collections_url));
+                        if (navigation.getSelectedItemId() != R.id.navigation_collections) {
+                            setFragment(collectionsFragment, getString(R.string.store_collections_url));
+                        }
                         return true;
                     case R.id.navigation_cart:
-                        setFragment(cartFragment, getString(R.string.store_cart_url));
+                        if (navigation.getSelectedItemId() != R.id.navigation_cart) {
+                            setFragment(cartFragment, getString(R.string.store_cart_url));
+                        }
                         return true;
                     case R.id.navigation_more:
                         setFragment(moreFragment, null);
+//                            loadMoreList();
+
                         return true;
                 }
                 return false;
             }
         };
     }
-
-    // TODO: 3/28/18 when returning from the chatActivity restore mWebView
-
-    // TODO: 3/9/18 implement the onSavedInstance method to properly handle configuration changes
-
-    /*@Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        mWebView.saveState(savedInstanceState);
-        savedInstanceState.putString("savedUrl", mWebView.getUrl());
-
-    }*/
-
-    // TODO: 3/9/18 implement onRestoreInstance methods to handle configuration changes
-    /*@Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        mWebView.restoreState(savedInstanceState);
-
-        String savedUrl = savedInstanceState.getString("savedUrl");
-        mWebView.loadUrl(savedUrl);
-
-    }*/
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -137,8 +125,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // TODO: 3/23/18 finish setting up analytics
 
         //constructing elements
-        mWebView = findViewById(R.id.webView);
+
         mMainFrame = findViewById(R.id.main_frame);
+
+        mWebView = findViewById(R.id.webView);
+        mMoreList = findViewById(R.id.more_list_view);
         mFabBackground = findViewById(R.id.fab_background);
         mSearchView = findViewById(R.id.search_view);
 
@@ -146,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mShareFab = findViewById(R.id.share_fab);
         mSearchFab = findViewById(R.id.search_fab);
         mChatFab = findViewById(R.id.chat_fab);
+        mRequestFab = findViewById(R.id.request_fab);
+
         isFabOpen = false;
 
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
@@ -156,6 +149,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFab.setOnClickListener(this);
         mShareFab.setOnClickListener(this);
         mSearchFab.setOnClickListener(this);
+        mChatFab.setOnClickListener(this);
+        mRequestFab.setOnClickListener(this);
 
         //construct fragments
         homeFragment = new HomeFragment();
@@ -193,8 +188,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //checking for deep links
                     onNewIntent(getIntent());
                 } else {
-                    //no deep link data
-                    proceed();
+                    //no deep link data, launch default
+                    Log.i(TAG, "launching home default");
+                    setFragment(homeFragment, getString(R.string.store_home_url));
                 }
             } else {
                 //coming from create account
@@ -208,13 +204,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void loadMoreList() { //edit to make reusable
+        //load the more items menu
+        Log.d(TAG, "at loadMoreList");
+
+        //make listView visible
+        mMoreList.setVisibility(View.VISIBLE);
+
+        String[] values = new String[]{"Account",
+                "Blog",
+                "Contact us",
+                "About us"
+        };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.more_items_text_view, values);
+        mMoreList.setAdapter(adapter);
+
+        mMoreList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                String itemValue = (String) mMoreList.getItemAtPosition(position);
+
+                //handle the item value clicks
+                switch (itemValue) {
+                    case "Account":
+                        setFragment(moreFragment, getString(R.string.store_acc_url));
+                    case "Blog":
+                        setFragment(moreFragment, getString(R.string.blog_url));
+                    case "Contact us":
+                        setFragment(moreFragment, getString(R.string.contact_url));
+                    case "About us":
+                        setFragment(moreFragment, getString(R.string.about_us_more_text));
+                    default:
+                        // TODO: 3/29/18 confirm method
+                        setFragment(moreFragment, null);
+                }
+            }
+        });
+
+    }
+
     private void setFragment(Fragment fragment, String url) {
         //set fragment, and pass on the url to load
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_frame, fragment);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
         if (url != null) {
-            // TODO: 3/28/18 check if there are saved pages
             mWebView.loadUrl(url);
         }
         Log.i(TAG, "at setFragment, setting Fragment " + fragment.toString() +
@@ -251,12 +289,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i(TAG, "incomingUrl is " + incomingUrl);
             setFragment(collectionsFragment, incomingUrl);
         }
-
-    }
-
-    private void proceed() {
-        setFragment(homeFragment, getString(R.string.store_home_url));
-        Log.i(TAG, "at proceed()");
     }
 
     @Override
@@ -273,8 +305,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         webView.getSettings().setAppCacheEnabled(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); // load online by default
-        //extra settings
-
     }
 
     private void showProgress() {
@@ -283,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mWebView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
                 if (isConnected()) {
+
                     if (progress < 40) {
                         mProgressDialog.setMessage("Loading...");
                         mProgressDialog.show();
@@ -299,10 +330,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void checkConnection() {
         Log.i(TAG, "at checkConnection");
         if (isConnected()) {
-            mFab.setVisibility(View.VISIBLE); //when connected show the fab
             mWebView.setVisibility(View.VISIBLE); //show webView
+            navigation.setVisibility(View.VISIBLE);//show navigation
+            mFab.setVisibility(View.VISIBLE); //when connected show the fab
             if (mWebView.getUrl() == null) {
-                proceed();
+                Log.i(TAG, "launching home default");
+                setFragment(homeFragment, getString(R.string.store_home_url));
             } else {
                 navigation.setSelectedItemId(navigation.getSelectedItemId());
                 mWebView.loadUrl(mWebView.getUrl());
@@ -315,6 +348,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean isConnected() {
         //check if there's a connection
+        Log.d(TAG, "at isConnected");
         Context context = getApplicationContext();
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -328,22 +362,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showAlertScreen() {
         Log.i(TAG, "at showAlertScreen, alert message is ");
-        mFab.setVisibility(View.INVISIBLE); //hide fab when alertScreen is visible
+        mFab.setVisibility(View.GONE); //hide fab when alertScreen is visible
+        navigation.setVisibility(View.GONE); //hide navigation on showAlert
+        mWebView.setVisibility(View.GONE);
         setFragment(alertFragment, null);
-        // TODO: 3/22/18 show the alert message
     }
 
     public void openAccount(View view) {
         if (isConnected()) {
             setFragment(meFragment, getString(R.string.store_acc_url));
-        } else {
-            checkConnection();
-        }
-    }
-
-    public void openProductRequests(View view) {
-        if (isConnected()) {
-            setFragment(meFragment, getString(R.string.store_requests_url));
         } else {
             checkConnection();
         }
@@ -528,6 +555,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showSearchView() {
 
+        //transit to collections fragment because more fragment blocks view
         if (navigation.getSelectedItemId() == R.id.navigation_more) {
             navigation.setSelectedItemId(R.id.navigation_collections);
         }
@@ -536,6 +564,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 R.anim.slide_down);
         mSearchView.startAnimation(slide_down);
         mSearchView.setVisibility(View.VISIBLE);
+
 
         //editing the text color and hints of the searchView
         int textViewId = mSearchView.getContext()
@@ -551,6 +580,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchView.setIconified(false);
         mSearchView.requestFocusFromTouch();
         mSearchView.setQueryHint(getString(R.string.search_view_query_hint_text));
+
+        //edit the background
+        mWebView.setAlpha(mFabBackground.getAlpha() * 1 / 2);
         mFabBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -561,6 +593,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void hideSearchView() {
+        //restore webView alpha
+        mWebView.setAlpha(mWebView.getAlpha() * 2);
         if (mSearchView.getVisibility() == View.VISIBLE) {
             //load animation
             Animation slide_up = AnimationUtils.loadAnimation(getApplicationContext(),
@@ -618,7 +652,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 openChat();
                 Log.d(TAG, "chatFAB");
                 break;
+            case R.id.request_fab:
+                //open requests page
+                animateFAB();
+                openRequests();
         }
+    }
+
+    private void openRequests() {
+        //open the product requests page
+        setFragment(homeFragment, getString(R.string.store_requests_url));
     }
 
     private void sharePage() {
@@ -642,9 +685,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mShareFab.startAnimation(fab_close);
             mSearchFab.startAnimation(fab_close);
             mChatFab.startAnimation(fab_close);
+            mRequestFab.startAnimation(fab_close);
             mShareFab.setClickable(false);
             mSearchFab.setClickable(false);
             mChatFab.setClickable(false);
+            mRequestFab.setClickable(false);
             isFabOpen = false;
             mFabBackground.setClickable(false);
             Log.d(TAG, "close");
@@ -655,9 +700,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mShareFab.startAnimation(fab_open);
             mSearchFab.startAnimation(fab_open);
             mChatFab.startAnimation(fab_open);
+            mRequestFab.startAnimation(fab_open);
             mShareFab.setClickable(true);
             mSearchFab.setClickable(true);
             mChatFab.setClickable(true);
+            mRequestFab.setClickable(true);
             isFabOpen = true;
             mFabBackground.setClickable(true);
             mFabBackground.setOnClickListener(new View.OnClickListener() {
@@ -671,10 +718,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void openChatTest(View view) {
-        openChat();
-    }
-
     private class MyWebViewClient extends WebViewClient {
 
         //manage navigation to outside links by creating a MyWebView class that extends the WebViewClient Class
@@ -686,6 +729,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         "url is store, url is " + url);
                 /*
                 This is my web site, so do not override; let my WebView load the page
+                */
+
+                // TODO: 3/29/18 interrupt the ur loading and loaf from file.
+
+                /*
                 updating the bottom navigation bar items
                  */
                 if (url.equals(getString(R.string.store_home_url))) {
@@ -774,7 +822,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Snackbar.make(mMainFrame,
                             "Unstable connection...",
                             Snackbar.LENGTH_LONG)
-                            .setAction("Reconnect", new View.OnClickListener() {
+                            .setAction("Retry", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     checkConnection();
