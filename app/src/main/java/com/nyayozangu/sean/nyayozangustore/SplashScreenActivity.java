@@ -21,7 +21,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
-
     private void checkFirstRun() {
 
         final String PREFS_NAME = "MyPrefsFile";

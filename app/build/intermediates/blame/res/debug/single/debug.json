@@ -76,6 +76,10 @@
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/layout/fragment_alert.xml"
     },
     {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_mail_outline_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-mdpi/ic_mail_outline_black_24dp.png"
+    },
+    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi_requests_tutorial_image.png.flat",
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-hdpi/requests_tutorial_image.png"
     },
@@ -1640,6 +1644,10 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/7fa337d4dea27b309888ad8aa9dce826/res/drawable/notification_bg_low.xml"
     },
     {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_mail_outline_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xxhdpi/ic_mail_outline_black_24dp.png"
+    },
+    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_chat_black_24dp.png.flat",
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xhdpi/ic_chat_black_24dp.png"
     },
@@ -2064,10 +2072,6 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png"
     },
     {
-        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout_more_items_text_view.xml.flat",
-        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/layout/more_items_text_view.xml"
-    },
-    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-ldrtl-hdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable-ldrtl-hdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -2078,6 +2082,10 @@
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_share_white_24dp.png.flat",
         "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-hdpi/ic_share_white_24dp.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_mail_outline_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xhdpi/ic_mail_outline_black_24dp.png"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/color_switch_thumb_material_dark.xml.flat",
@@ -2134,6 +2142,10 @@
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-tvdpi-v4_ic_plusone_medium_off_client.png.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/play-services-plus-12.0.0.aar/411719da7adc84283fb977387e07e23d/res/drawable-tvdpi-v4/ic_plusone_medium_off_client.png"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/layout_more_items_list_view.xml.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/layout/more_items_list_view.xml"
     },
     {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
@@ -2756,7 +2768,15 @@
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/color/abc_tint_seek_thumb.xml"
     },
     {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_mail_outline_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-xxxhdpi/ic_mail_outline_black_24dp.png"
+    },
+    {
         "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable_abc_vector_test.xml.flat",
         "source": "/Users/Sean/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/de82c405545e763dadfa4e1f625d57c7/res/drawable/abc_vector_test.xml"
+    },
+    {
+        "merged": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_mail_outline_black_24dp.png.flat",
+        "source": "/Users/Sean/AndroidStudioProjects/NyayoZanguStore/app/src/main/res/drawable-hdpi/ic_mail_outline_black_24dp.png"
     }
 ]

@@ -13,23 +13,33 @@
         android:layout_height="match_parent"
         android:layout_above="@id/navigation">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/more_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/text_margin"
+                android:paddingStart="@dimen/text_margin"
+                android:text="@string/app_name"
+                android:textColor="@color/colorWhite" />
+        </android.support.v7.widget.Toolbar>
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:background="@color/grey_background" />
+
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <ListView
-            android:id="@+id/more_list_view"
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"></ListView>
-
-        <RelativeLayout
-            android:id="@+id/fab_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/chat_fab"
@@ -118,6 +128,11 @@
             android:searchIcon="@drawable/ic_search_white_24dp"
             android:theme="@style/AppTheme"
             android:visibility="invisible" />
+
+        <RelativeLayout
+            android:id="@+id/fab_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </FrameLayout>
 
 

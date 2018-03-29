@@ -8,6 +8,7 @@
     <color name="colorWhiteTransparent">#80ffffff</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="grey_background">#efefef</color>
 
     <color name="colorFAB1">#9368d1</color>
     <color name="colorFAB2">#f54b8617</color>

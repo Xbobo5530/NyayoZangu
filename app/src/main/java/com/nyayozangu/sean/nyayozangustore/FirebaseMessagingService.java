@@ -45,13 +45,17 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
             String title = data.get("title");
             String message = data.get("message");
-            String targetUrl = data.get("targetUrl");
+            String targetUrl = data.get("targetUrl").trim();
             Log.d(TAG, "onMessageReceived: Message Received: \n" +
                     "Title: " + title + "\n" +
                     "Message: " + message + "\n" +
                     "targetUrl: " + targetUrl);
 
-            sendNotification(title, message, targetUrl);
+            if (!targetUrl.isEmpty()) {
+                sendNotification(title, message, targetUrl);
+            } else {
+                sendNotification(title, message, null);
+            }
         }
     }
 
