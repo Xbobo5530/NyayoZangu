@@ -29,7 +29,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -80,6 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // TODO: 3/28/18 when returning from the chatActivity restore mWebView
 
+    /**
+     * handle the @bottomNavigationBar
+     *
+     */
+
     {
         mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
             //on selecting bottom navigation item
@@ -109,6 +113,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
     }
+
+    /**
+     * handle the onCreate
+     *
+     * @param savedInstanceState checks the saved state
+     */
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -207,6 +217,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+    /**
+     * Loads the items on the more tab for the bottomNavigationBar
+     */
+
+
     private void loadMoreList() { //edit to make reusable
         //load the more items menu
         Log.d(TAG, "at loadMoreList");
@@ -218,38 +234,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Array of strings for ListView Title
         final String[] listViewTitle = new String[]{
-                "Account",
+                "Product Requests",
                 "Blog",
-                "Contact us",
+                "Chat with us",
+                "Email us",
                 "About us"
         };
 
         int[] listViewImage = new int[]{
-                R.drawable.ic_person_black_24dp,
+                R.drawable.ic_explore_black_24dp,
                 R.drawable.ic_book_black_24dp,
+                R.drawable.ic_chat_black_24dp,
                 R.drawable.ic_mail_outline_black_24dp,
                 R.drawable.ic_info_black_24dp
         };
 
-        String[] listViewShortDescription = new String[]{
-                "Android ListView Short Description",
-                "Android ListView Short Description",
-                "Android ListView Short Description",
-                "Android ListView Short Description"
-        };
 
         List<HashMap<String, String>> aList = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             HashMap<String, String> hm = new HashMap<String, String>();
             hm.put("listview_title", listViewTitle[i]);
-            hm.put("listview_discription", listViewShortDescription[i]);
             hm.put("listview_image", Integer.toString(listViewImage[i]));
             aList.add(hm);
         }
 
-        String[] from = {"listview_image", "listview_title", "listview_discription"};
-        int[] to = {R.id.listview_image, R.id.listview_item_title, R.id.listview_item_short_description};
+        String[] from = {"listview_image", "listview_title"};
+        int[] to = {R.id.listview_image, R.id.listview_item_title};
 
         SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), aList, R.layout.more_items_list_view, from, to);
         ListView androidListView = findViewById(R.id.list_view);
@@ -259,19 +270,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                ListView mListView = findViewById(R.id.list_view);
-
                 //handle the item value clicks
                 switch (listViewTitle[position]) {
-                    case "Account":
-                        //hide listView in more
-                        mListView.setVisibility(View.GONE);
-                        setFragment(moreFragment, getString(R.string.store_acc_url));
+                    case "Product Requests":
+                        setFragment(moreFragment, getString(R.string.store_requests_url));
                         break;
                     case "Blog":
                         setFragment(moreFragment, getString(R.string.blog_url));
                         break;
-                    case "Contact us":
+                    case "Chat with us":
+                        openChat();
+                        break;
+                    case "Email us":
                         setFragment(moreFragment, getString(R.string.contact_url));
                         break;
                     case "About us":
@@ -287,6 +297,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    /**
+     * sets Fragments
+     * @param fragment the fragment that should be set.
+     * @param url the url to pass to the webView mWebView.
+     */
+
     private void setFragment(Fragment fragment, String url) {
         //set fragment, and pass the url to load
         FragmentTransaction fragmentTransaction = getSupportFragmentManager()
@@ -300,6 +316,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i(TAG, "at setFragment, setting Fragment " + fragment.toString() +
                 "\nloading mWebView, url is " + url);
     }
+
+
+    /**
+     * handles incoming notifications
+     * @param intent the intent for the notification
+     */
 
     private void handleNotifications(Intent intent) {
         Log.d(TAG, "at handleNotifications");
@@ -322,11 +344,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * handles new intents
+     * @param intent the incoming intents
+     */
+
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         handleDeepLinkIntent(intent);
         handleNotifications(intent);
     }
+
+    /**
+     * handles deepLinks
+     * @param intent the deepLink intent that contains contexts of the deepLink
+     */
 
     private void handleDeepLinkIntent(Intent intent) {
         Log.i(TAG, "at handleDeepLinkIntent");
@@ -338,6 +370,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setFragment(collectionsFragment, incomingUrl);
         }
     }
+
+
+    /**
+     * empty for overriding the portrait and landscape configuration changes
+     */
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -817,6 +854,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //handle http errors
+        // TODO: 3/30/18 handleHttp errors
+        /*
         @Override
         public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
             Log.i(TAG, "at onReceivedHttpError, error is " + errorResponse);
@@ -843,7 +882,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 showAlertScreen();
             }
-        }
+        }*/
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
