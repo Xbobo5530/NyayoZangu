@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * handle the onCreate
-     *
      * @param savedInstanceState checks the saved state
      */
 
@@ -221,8 +220,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Loads the items on the more tab for the bottomNavigationBar
      */
-
-
     private void loadMoreList() { //edit to make reusable
         //load the more items menu
         Log.d(TAG, "at loadMoreList");
@@ -254,12 +251,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < 5; i++) {
             HashMap<String, String> hm = new HashMap<String, String>();
-            hm.put("listview_title", listViewTitle[i]);
-            hm.put("listview_image", Integer.toString(listViewImage[i]));
+            hm.put("listView_title", listViewTitle[i]);
+            hm.put("listView_image", Integer.toString(listViewImage[i]));
             aList.add(hm);
         }
 
-        String[] from = {"listview_image", "listview_title"};
+        String[] from = {"listView_image", "listView_title"};
         int[] to = {R.id.listview_image, R.id.listview_item_title};
 
         SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), aList, R.layout.more_items_list_view, from, to);
@@ -302,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param fragment the fragment that should be set.
      * @param url the url to pass to the webView mWebView.
      */
-
     private void setFragment(Fragment fragment, String url) {
         //set fragment, and pass the url to load
         FragmentTransaction fragmentTransaction = getSupportFragmentManager()
@@ -322,7 +318,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * handles incoming notifications
      * @param intent the intent for the notification
      */
-
     private void handleNotifications(Intent intent) {
         Log.d(TAG, "at handleNotifications");
 
@@ -348,7 +343,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * handles new intents
      * @param intent the incoming intents
      */
-
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         handleDeepLinkIntent(intent);
@@ -359,7 +353,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * handles deepLinks
      * @param intent the deepLink intent that contains contexts of the deepLink
      */
-
     private void handleDeepLinkIntent(Intent intent) {
         Log.i(TAG, "at handleDeepLinkIntent");
         String appLinkAction = intent.getAction();
@@ -375,12 +368,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * empty for overriding the portrait and landscape configuration changes
      */
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
 
+    /**
+     * handling cache
+     *
+     * @param webView the webView object that requires cache
+     */
     @SuppressLint("SetJavaScriptEnabled")
     private void handleCache(WebView webView) {
         //noinspection deprecation
@@ -392,6 +389,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); // load online by default
     }
 
+    /**
+     * show the progressDialog on loading
+     */
     private void showProgress() {
         //construct the progressDialog
         mProgressDialog = new ProgressDialog(this);
@@ -413,9 +413,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    /*
-    *
-    * */
+    /**
+     * checking whether the device is connected to the internet
+     */
     public void checkConnection() {
         Log.i(TAG, "at checkConnection");
         if (isConnected()) {
@@ -435,6 +435,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * @returns true if device is connected to the internet and false if there no internet
+     */
     private boolean isConnected() {
         //check if there's a connection
         Log.d(TAG, "at isConnected");
@@ -449,6 +452,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 activeNetwork.isConnectedOrConnecting();
     }
 
+    /**
+     * shows thea alert screen on connection error
+     */
     private void showAlertScreen() {
         Log.i(TAG, "at showAlertScreen, alert message is ");
         mFab.setVisibility(View.GONE); //hide fab when alertScreen is visible
@@ -457,12 +463,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setFragment(alertFragment, null);
     }
 
+    /**
+     * the retry to connect button on the alertScreen
+     */
     public void reConnect(View view) {
         //when the retry button is check the connection;
         rotateReconnect(view);
         checkConnection();
     }
 
+    /**
+     * overrides the back button press action
+     */
     @Override
     public void onBackPressed() {
         //back button is pressed
@@ -543,6 +555,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * handles back backButton press when there's no history and/or user is at homescreen
+     */
     public void doubleBackToExit() {
         Log.d(TAG, "at doubleBackToExit");
 
@@ -565,6 +580,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }, 2000);
     }
 
+    /**
+     * shows SnackBar to prompt the user to exit
+     */
     public void promptExit() {
         Snackbar.make(mMainFrame,
                 "Are you you want to exit?",
@@ -579,6 +597,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .show();
     }
 
+    /**
+     * animates the reconnect button on alertScreen
+     */
     public void rotateReconnect(View view) {
         //animate rotation on the alert screen
         ImageView reconnectAnimation;
@@ -587,6 +608,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reconnectAnimation.startAnimation(startRotateAnimation);
     }
 
+
+    /**
+     * opens search view
+     */
     public void openSearch() {
         Log.d(TAG, "at openSearch");
         showSearchView();
@@ -611,6 +636,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+
+    /**
+     * shows the searchView
+     */
     private void showSearchView() {
         //Load animation
         Animation slide_down = AnimationUtils.loadAnimation(getApplicationContext(),
@@ -644,6 +673,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * hides the searchView
+     */
     private void hideSearchView() {
         //restore webView alpha
         mFabBackground.setBackgroundColor(Color.parseColor("#00000000"));
@@ -657,6 +689,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * constructs the search Url from a search query
+     * @param query the search query entered
+     * @returns String: the constructed Url
+     */
     private String searchItemUrlConstructor(String query) {
         Log.d(TAG, "at searchItemUrlConstructor");
         String searchUrlHead = "https://store.nyayozangu.com/search?q=";
@@ -672,13 +709,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return searchUrlHead + refinedSearchQuery;
     }
 
+    /**
+     * opens the ChatActivity
+     */
     public void openChat() {
         //opening the chatActivity
         Log.d(TAG, "at openChat");
         startActivity(new Intent(getApplicationContext(), ChatActivity.class));
     }
 
-    //for FAB animation
+    /**
+     * Overrides the onClick method to animate the FAB buttons
+     */
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -711,11 +753,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * opens the product requests page
+     */
     private void openRequests() {
         //open the product requests page
         setFragment(homeFragment, getString(R.string.store_requests_url));
     }
 
+    /**
+     * shares current page Url to other apps
+     */
     private void sharePage() {
         try {
             String urlToShare = mWebView.getOriginalUrl();
@@ -729,6 +777,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * handles animations for the FABs
+     */
     public void animateFAB() {
 
         if (isFabOpen) {
@@ -772,8 +823,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * handles the behavior of the WebViewClient
+     */
     private class MyWebViewClient extends WebViewClient {
 
+        /**
+         * overrides loading Urls behavior of the webViewClient
+         * @param url the fired url
+         * @param view the webView that will handle the loading of the url
+         * @returns false to override and true to use default behaviour
+         */
         //manage navigation to outside links by creating a MyWebView class that extends the WebViewClient Class
         @SuppressWarnings("deprecation")
         @Override
@@ -814,6 +874,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
 
+
+        /**
+         * special case for Android N
+         * @param view the webView that handles the url
+         * @param request the WebResourceRequest
+         * @returns false to override, true to mantain default behaviour
+         */
         @TargetApi(Build.VERSION_CODES.N)
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -884,6 +951,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }*/
 
+        /**
+         * keeps record of the visited pages
+         * @param view the WebView that launches the urls
+         * @param url the launched url
+         */
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
 

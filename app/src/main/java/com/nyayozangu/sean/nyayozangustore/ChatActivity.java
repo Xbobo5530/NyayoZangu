@@ -62,23 +62,14 @@ public class ChatActivity extends Activity implements JivoDelegate {
 
     }
 
-    /*@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // Check if the key event was the Back button
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            //go to MainActivity
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
-        // If it wasn't the Back key or there's no web page history, bubble up to the default
-        // system behavior (probably exit the activity)
-        return super.onKeyDown(keyCode, event);
-    }*/
-
+    /**
+     * overrides the back button pressed behaviour
+     */
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
-        /*super.onBackPressed();*/
+
     }
 }

@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 public class SliderAdapter extends PagerAdapter {
 
+    /**
+     * the content of the sliderView
+     */
     //Arrays
     public int[] slide_images = {
             R.drawable.nyayozangu_tutorial_image,

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -30,6 +29,11 @@ public class TutorialActivity extends AppCompatActivity {
 
         }
 
+        /**
+         * overrides the onPageSelected behaviour
+         *
+         * @param i the selected page
+         */
         @SuppressLint("SetTextI18n")
         @Override
         public void onPageSelected(int i) {
@@ -72,8 +76,6 @@ public class TutorialActivity extends AppCompatActivity {
                         mSlideViewPager.setCurrentItem(mCurrentPage + 1);
                     }
                 });
-
-
             }
         }
 
@@ -133,25 +135,7 @@ public class TutorialActivity extends AppCompatActivity {
         }
 
         if (mDots.length > 0){
-
             mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
         }
-
-    }
-
-    public void closeTutorial(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
-        Log.i("Sean", "at Tutorial screen, close btn is clicked");
-    }
-
-    public void createAccount(View view) {
-        //open the create acc page when clicked
-        Intent intent = new Intent(this, MainActivity.class);
-        String createAccUrl = getString(R.string.create_acc_url);
-        intent.putExtra(EXTRA_MESSAGE, createAccUrl);
-        startActivity(intent);
-        finish();
-
     }
 }

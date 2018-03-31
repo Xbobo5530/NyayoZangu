@@ -59,6 +59,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         }
     }
 
+    /**
+     * sends the notification
+     *
+     * @param title       the title of the notification
+     * @param messageBody the message of the notification
+     * @param targetUrl   the url to open when the notification is opened
+     */
     private void sendNotification(String title, String messageBody, String targetUrl) {
         Log.d(TAG, "at sendNotification");
         Intent intent = new Intent(this, MainActivity.class);
